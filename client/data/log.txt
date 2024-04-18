@@ -1,0 +1,554 @@
+[2024-04-16 10:53:41] connexion avec le serveur 
+[2024-04-16 10:53:41] Données envoyées avec succès sur le socket
+[2024-04-16 10:53:41] fermeture du socket.
+[2024-04-16 10:54:12] connexion avec le serveur 
+[2024-04-16 10:54:12] Données envoyées avec succès sur le socket
+[2024-04-16 10:54:12] Données envoyées avec succès sur le socket
+[2024-04-16 10:54:12] Erreur lors de l'envoi des données sur le socket
+[2024-04-16 13:21:26] Utilisation: ./client @ip port
+[2024-04-16 13:21:29] Utilisation: ./client @ip port
+[2024-04-16 13:21:38] connexion avec le serveur 
+[2024-04-16 13:21:38] Données envoyées avec succès sur le socket
+[2024-04-16 13:21:38] Données envoyées avec succès sur le socket
+[2024-04-16 13:21:38] Erreur lors de l'envoi des données sur le socket
+[2024-04-16 13:25:46] Utilisation: ./client @ip port
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:53] connexion avec le serveur 
+[2024-04-16 13:25:53] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:54] connexion avec le serveur 
+[2024-04-16 13:25:54] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:55] connexion avec le serveur 
+[2024-04-16 13:25:55] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:55] connexion avec le serveur 
+[2024-04-16 13:25:55] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:55] connexion avec le serveur 
+[2024-04-16 13:25:55] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:55] connexion avec le serveur 
+[2024-04-16 13:25:55] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:55] connexion avec le serveur 
+[2024-04-16 13:25:55] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:55] connexion avec le serveur 
+[2024-04-16 13:25:55] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:55] connexion avec le serveur 
+[2024-04-16 13:25:55] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:55] connexion avec le serveur 
+[2024-04-16 13:25:55] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:55] connexion avec le serveur 
+[2024-04-16 13:25:55] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:55] connexion avec le serveur 
+[2024-04-16 13:25:55] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:55] connexion avec le serveur 
+[2024-04-16 13:25:55] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:55] connexion avec le serveur 
+[2024-04-16 13:25:55] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:55] connexion avec le serveur 
+[2024-04-16 13:25:55] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:55] connexion avec le serveur 
+[2024-04-16 13:25:55] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:55] connexion avec le serveur 
+[2024-04-16 13:25:55] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:55] connexion avec le serveur 
+[2024-04-16 13:25:55] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:55] connexion avec le serveur 
+[2024-04-16 13:25:55] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:55] connexion avec le serveur 
+[2024-04-16 13:25:55] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:55] connexion avec le serveur 
+[2024-04-16 13:25:55] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:55] connexion avec le serveur 
+[2024-04-16 13:25:55] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:55] connexion avec le serveur 
+[2024-04-16 13:25:55] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:55] connexion avec le serveur 
+[2024-04-16 13:25:55] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:55] connexion avec le serveur 
+[2024-04-16 13:25:55] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:55] connexion avec le serveur 
+[2024-04-16 13:25:55] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:55] connexion avec le serveur 
+[2024-04-16 13:25:55] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:55] connexion avec le serveur 
+[2024-04-16 13:25:55] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:55] connexion avec le serveur 
+[2024-04-16 13:25:55] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:55] connexion avec le serveur 
+[2024-04-16 13:25:55] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:55] connexion avec le serveur 
+[2024-04-16 13:25:55] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:55] connexion avec le serveur 
+[2024-04-16 13:25:55] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:55] connexion avec le serveur 
+[2024-04-16 13:25:55] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:56] connexion avec le serveur 
+[2024-04-16 13:25:56] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:56] connexion avec le serveur 
+[2024-04-16 13:25:56] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:56] connexion avec le serveur 
+[2024-04-16 13:25:56] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:56] connexion avec le serveur 
+[2024-04-16 13:25:56] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:56] connexion avec le serveur 
+[2024-04-16 13:25:56] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:56] connexion avec le serveur 
+[2024-04-16 13:25:56] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:56] connexion avec le serveur 
+[2024-04-16 13:25:56] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:56] connexion avec le serveur 
+[2024-04-16 13:25:56] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:56] connexion avec le serveur 
+[2024-04-16 13:25:56] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:56] connexion avec le serveur 
+[2024-04-16 13:25:56] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:56] connexion avec le serveur 
+[2024-04-16 13:25:56] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:56] connexion avec le serveur 
+[2024-04-16 13:25:56] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:56] connexion avec le serveur 
+[2024-04-16 13:25:56] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:56] connexion avec le serveur 
+[2024-04-16 13:25:56] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:56] connexion avec le serveur 
+[2024-04-16 13:25:56] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:56] connexion avec le serveur 
+[2024-04-16 13:25:56] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:56] connexion avec le serveur 
+[2024-04-16 13:25:56] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:56] connexion avec le serveur 
+[2024-04-16 13:25:56] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:56] connexion avec le serveur 
+[2024-04-16 13:25:56] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:56] connexion avec le serveur 
+[2024-04-16 13:25:56] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:56] connexion avec le serveur 
+[2024-04-16 13:25:56] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:56] connexion avec le serveur 
+[2024-04-16 13:25:56] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:56] connexion avec le serveur 
+[2024-04-16 13:25:56] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:56] connexion avec le serveur 
+[2024-04-16 13:25:56] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:56] connexion avec le serveur 
+[2024-04-16 13:25:56] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:56] connexion avec le serveur 
+[2024-04-16 13:25:56] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:56] connexion avec le serveur 
+[2024-04-16 13:25:56] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:56] connexion avec le serveur 
+[2024-04-16 13:25:56] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:56] connexion avec le serveur 
+[2024-04-16 13:25:56] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:56] connexion avec le serveur 
+[2024-04-16 13:25:56] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:56] connexion avec le serveur 
+[2024-04-16 13:25:56] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:56] connexion avec le serveur 
+[2024-04-16 13:25:56] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:56] connexion avec le serveur 
+[2024-04-16 13:25:56] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:56] connexion avec le serveur 
+[2024-04-16 13:25:56] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:56] connexion avec le serveur 
+[2024-04-16 13:25:56] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:56] connexion avec le serveur 
+[2024-04-16 13:25:56] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:56] connexion avec le serveur 
+[2024-04-16 13:25:56] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:57] connexion avec le serveur 
+[2024-04-16 13:25:57] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:57] connexion avec le serveur 
+[2024-04-16 13:25:57] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:57] connexion avec le serveur 
+[2024-04-16 13:25:57] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:57] connexion avec le serveur 
+[2024-04-16 13:25:57] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:57] connexion avec le serveur 
+[2024-04-16 13:25:57] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:57] connexion avec le serveur 
+[2024-04-16 13:25:57] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:57] connexion avec le serveur 
+[2024-04-16 13:25:57] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:57] connexion avec le serveur 
+[2024-04-16 13:25:57] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:57] connexion avec le serveur 
+[2024-04-16 13:25:57] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:57] connexion avec le serveur 
+[2024-04-16 13:25:57] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:57] connexion avec le serveur 
+[2024-04-16 13:25:57] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:57] connexion avec le serveur 
+[2024-04-16 13:25:57] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:57] connexion avec le serveur 
+[2024-04-16 13:25:57] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:57] connexion avec le serveur 
+[2024-04-16 13:25:57] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:57] connexion avec le serveur 
+[2024-04-16 13:25:57] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:57] connexion avec le serveur 
+[2024-04-16 13:25:57] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:57] connexion avec le serveur 
+[2024-04-16 13:25:57] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:57] connexion avec le serveur 
+[2024-04-16 13:25:57] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:57] connexion avec le serveur 
+[2024-04-16 13:25:57] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:57] connexion avec le serveur 
+[2024-04-16 13:25:57] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:57] connexion avec le serveur 
+[2024-04-16 13:25:57] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:57] connexion avec le serveur 
+[2024-04-16 13:25:57] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:57] connexion avec le serveur 
+[2024-04-16 13:25:57] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:57] connexion avec le serveur 
+[2024-04-16 13:25:57] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:57] connexion avec le serveur 
+[2024-04-16 13:25:57] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:57] connexion avec le serveur 
+[2024-04-16 13:25:57] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:57] connexion avec le serveur 
+[2024-04-16 13:25:57] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:57] connexion avec le serveur 
+[2024-04-16 13:25:57] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:57] connexion avec le serveur 
+[2024-04-16 13:25:57] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:57] connexion avec le serveur 
+[2024-04-16 13:25:57] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:57] connexion avec le serveur 
+[2024-04-16 13:25:57] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:57] connexion avec le serveur 
+[2024-04-16 13:25:57] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:57] connexion avec le serveur 
+[2024-04-16 13:25:57] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:57] connexion avec le serveur 
+[2024-04-16 13:25:57] Données envoyées avec succès sur le socket
+[2024-04-16 13:25:57] connexion avec le serveur 
+[2024-04-16 13:25:57] Données envoyées avec succès sur le socket
+[2024-04-16 13:37:42] connexion avec le serveur 
+[2024-04-16 13:37:42] Données envoyées avec succès sur le socket
+[2024-04-16 13:39:32] connexion avec le serveur 
+[2024-04-16 13:39:32] Données envoyées avec succès sur le socket
+[2024-04-16 13:41:22] connexion avec le serveur 
+[2024-04-16 13:41:22] Données envoyées avec succès sur le socket
+[2024-04-16 13:45:09] connexion avec le serveur 
+[2024-04-16 13:45:09] Données envoyées avec succès sur le socket
+[2024-04-16 13:51:25] connexion avec le serveur 
+[2024-04-16 13:51:25] Données envoyées avec succès sur le socket
+[2024-04-16 13:59:50] connexion avec le serveur 
+[2024-04-16 13:59:50] Données envoyées avec succès sur le socket
+[2024-04-16 14:16:49] connexion avec le serveur 
+[2024-04-16 14:16:49] Données envoyées avec succès sur le socket
+[2024-04-16 14:22:44] connexion avec le serveur 
+[2024-04-16 14:22:44] Données envoyées avec succès sur le socket
+[2024-04-16 14:43:23] connexion avec le serveur 
+[2024-04-16 14:43:23] Données envoyées avec succès sur le socket
