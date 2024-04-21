@@ -1,0 +1,12 @@
+127.0.0.1 : 54606
+log.txt 904 octets
+fichiers.txt 0 octets
+main.cpp 6171 octets
+INF4208_Part1_Wireless Networks.pdf 1988947 octets
+
+127.0.0.1 : 34608
+556 904 octets
+fichiers.txt 0 octets
+main.cpp 6171 octets
+INF4208_Part1_Wireless Networks.pdf 1988947 octets
+

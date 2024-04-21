@@ -1,40 +1,112 @@
-[2024-04-16 22:56:45] INFO: successfully created socket
-[2024-04-16 22:56:45] INFO: success connect to a server
-[2024-04-16 22:56:45] INFO: Data successful sending into the socket
-[2024-04-16 22:56:54] File created in the 'data'.
-[2024-04-16 22:58:37] INFO: successfully created socket
-[2024-04-16 22:58:37] INFO: success connect to a server
-[2024-04-16 22:58:37] INFO: Data successful sending into the socket
-[2024-04-16 22:58:54] File moved from 'data'.
-[2024-04-16 23:00:55] INFO: successfully created socket
-[2024-04-16 23:00:55] INFO: success connect to a server
-[2024-04-16 23:00:55] INFO: Data successful sending into the socket
-[2024-04-16 23:04:40] INFO: successfully created socket
-[2024-04-16 23:04:40] INFO: success connect to a server
-[2024-04-16 23:04:40] INFO: Data successful sending into the socket
-[2024-04-16 23:05:46] INFO: successfully created socket
-[2024-04-16 23:05:46] INFO: success connect to a server
-[2024-04-16 23:05:46] INFO: Data successful sending into the socket
-[2024-04-16 23:06:19] File moved to 'data'.
-[2024-04-16 23:06:19] WARNING: Changes detected in the directory 'data': The data will be sent again.
-[2024-04-16 23:06:19] INFO: Data successful sending into the socket
-[2024-04-16 23:07:09] INFO: successfully created socket
-[2024-04-16 23:07:09] INFO: success connect to a server
-[2024-04-16 23:07:09] INFO: Data successful sending into the socket
-[2024-04-16 23:07:23] File moved from 'data'.
-[2024-04-16 23:07:23] WARNING: Changes detected in the directory 'data': The data will be sent again.
-[2024-04-16 23:07:23] INFO: Data successful sending into the socket
-[2024-04-16 23:08:29] File moved to 'data'.
-[2024-04-16 23:08:29] WARNING: Changes detected in the directory 'data': The data will be sent again.
-[2024-04-16 23:09:18] INFO: successfully created socket
-[2024-04-16 23:09:18] INFO: success connect to a server
-[2024-04-16 23:09:18] INFO: Data successful sending into the socket
-[2024-04-16 23:09:40] File moved to 'data'.
-[2024-04-16 23:09:40] WARNING: Changes detected in the directory 'data': The data will be sent again.
-[2024-04-16 23:09:40] INFO: Data successful sending into the socket
-[2024-04-16 23:10:07] File moved to 'data'.
-[2024-04-16 23:10:07] WARNING: Changes detected in the directory 'data': The data will be sent again.
-[2024-04-16 23:11:13] INFO: successfully created socket
-[2024-04-16 23:11:13] INFO: success connect to a server
-[2024-04-18 21:15:50] INFO: successfully created socket
-[2024-04-18 21:15:50] ERROR: error when connect to a server
+[2024-04-21 13:56:05] INFO: successfully created socket
+[2024-04-21 13:56:05] INFO: success connect to a server
+[2024-04-21 13:56:05] INFO: Data successful sending into the socket
+[2024-04-21 13:56:21] File moved from 'data'.
+[2024-04-21 13:56:21] WARNING: Changes detected in the directory 'data': The data will be sent again.
+[2024-04-21 13:56:21] INFO: Data successful sending into the socket
+[2024-04-21 13:56:43] File moved to 'data'.
+[2024-04-21 13:56:43] WARNING: Changes detected in the directory 'data': The data will be sent again.
+[2024-04-21 13:57:49] INFO: successfully created socket
+[2024-04-21 13:57:49] INFO: success connect to a server
+[2024-04-21 13:57:49] INFO: Data successful sending into the socket
+[2024-04-21 13:58:17] INFO: successfully created socket
+[2024-04-21 13:58:17] INFO: success connect to a server
+[2024-04-21 13:58:17] INFO: Data successful sending into the socket
+[2024-04-21 14:00:46] INFO: successfully created socket
+[2024-04-21 14:00:46] INFO: success connect to a server
+[2024-04-21 14:00:46] INFO: Data successful sending into the socket
+[2024-04-21 14:37:54] INFO: successfully created socket
+[2024-04-21 14:37:54] INFO: success connect to a server
+[2024-04-21 14:37:54] INFO: Data successful sending into the socket
+[2024-04-21 14:39:46] INFO: successfully created socket
+[2024-04-21 14:39:46] INFO: success connect to a server
+[2024-04-21 14:39:46] INFO: Data successful sending into the socket
+[2024-04-21 14:44:24] INFO: successfully created socket
+[2024-04-21 14:44:24] INFO: success connect to a server
+[2024-04-21 14:44:24] INFO: Data successful sending into the socket
+[2024-04-21 14:50:43] INFO: successfully created socket
+[2024-04-21 14:50:43] INFO: success connect to a server
+[2024-04-21 14:50:43] INFO: Data successful sending into the socket
+[2024-04-21 14:52:48] INFO: successfully created socket
+[2024-04-21 14:52:48] INFO: success connect to a server
+[2024-04-21 14:52:48] INFO: Data successful sending into the socket
+[2024-04-21 14:53:07] File moved from 'data'.
+[2024-04-21 14:53:07] WARNING: Changes detected in the directory 'data': The data will be sent again.
+[2024-04-21 14:53:07] INFO: Data successful sending into the socket
+[2024-04-21 15:04:11] INFO: successfully created socket
+[2024-04-21 15:04:11] INFO: success connect to a server
+[2024-04-21 15:04:11] INFO: Data successful sending into the socket
+[2024-04-21 15:05:30] INFO: successfully created socket
+[2024-04-21 15:05:30] INFO: success connect to a server
+[2024-04-21 15:05:30] INFO: Data successful sending into the socket
+[2024-04-21 15:07:25] INFO: successfully created socket
+[2024-04-21 15:07:25] INFO: success connect to a server
+[2024-04-21 15:07:25] INFO: Data successful sending into the socket
+[2024-04-21 15:08:36] INFO: successfully created socket
+[2024-04-21 15:08:36] INFO: success connect to a server
+[2024-04-21 15:08:36] INFO: Data successful sending into the socket
+[2024-04-21 15:16:18] INFO: successfully created socket
+[2024-04-21 15:16:18] INFO: success connect to a server
+[2024-04-21 15:16:18] INFO: Data successful sending into the socket
+[2024-04-21 15:16:32] File moved to 'data'.
+[2024-04-21 15:16:32] WARNING: Changes detected in the directory 'data': The data will be sent again.
+[2024-04-21 15:16:32] INFO: Data successful sending into the socket
+[2024-04-21 15:52:28] INFO: successfully created socket
+[2024-04-21 15:52:28] INFO: success connect to a server
+[2024-04-21 15:52:28] INFO: Data successful sending into the socket
+[2024-04-21 15:53:04] INFO: successfully created socket
+[2024-04-21 15:53:04] INFO: success connect to a server
+[2024-04-21 15:53:04] INFO: Data successful sending into the socket
+[2024-04-21 15:54:49] File moved from 'data'.
+[2024-04-21 15:54:49] WARNING: Changes detected in the directory 'data': The data will be sent again.
+[2024-04-21 15:54:49] INFO: Data successful sending into the socket
+[2024-04-21 15:54:49] File moved to 'data'.
+[2024-04-21 15:54:49] WARNING: Changes detected in the directory 'data': The data will be sent again.
+[2024-04-21 15:55:01] INFO: successfully created socket
+[2024-04-21 15:55:01] INFO: success connect to a server
+[2024-04-21 15:55:01] INFO: Data successful sending into the socket
+[2024-04-21 15:56:42] File moved from 'data'.
+[2024-04-21 15:56:42] WARNING: Changes detected in the directory 'data': The data will be sent again.
+[2024-04-21 15:56:42] INFO: Data successful sending into the socket
+[2024-04-21 16:02:37] INFO: successfully created socket
+[2024-04-21 16:02:37] INFO: success connect to a server
+[2024-04-21 16:02:37] INFO: Data successful sending into the socket
+[2024-04-21 16:14:55] INFO: successfully created socket
+[2024-04-21 16:14:55] INFO: success connect to a server
+[2024-04-21 16:14:55] INFO: Data successful sending into the socket
+[2024-04-21 16:35:05] INFO: successfully created socket
+[2024-04-21 16:35:05] INFO: success connect to a server
+[2024-04-21 16:35:05] INFO: Data successful sending into the socket
+[2024-04-21 16:35:18] INFO: successfully created socket
+[2024-04-21 16:35:18] INFO: success connect to a server
+[2024-04-21 16:35:18] INFO: Data successful sending into the socket
+[2024-04-21 18:17:39] INFO: successfully created socket
+[2024-04-21 18:17:39] INFO: success connect to a server
+[2024-04-21 18:17:39] INFO: Data successful sending into the socket
+[2024-04-21 18:59:01] INFO: successfully created socket
+[2024-04-21 18:59:01] INFO: success connect to a server
+[2024-04-21 18:59:01] INFO: Data successful sending into the socket
+[2024-04-21 19:01:23] INFO: successfully created socket
+[2024-04-21 19:01:23] INFO: success connect to a server
+[2024-04-21 19:01:23] INFO: Data successful sending into the socket
+[2024-04-21 19:04:47] INFO: successfully created socket
+[2024-04-21 19:04:47] INFO: success connect to a server
+[2024-04-21 19:04:47] INFO: Data successful sending into the socket
+[2024-04-21 19:18:24] File moved from 'data'.
+[2024-04-21 19:18:24] WARNING: Changes detected in the directory 'data': The data will be sent again.
+[2024-04-21 19:18:24] INFO: Data successful sending into the socket
+[2024-04-21 19:18:59] INFO: successfully created socket
+[2024-04-21 19:18:59] INFO: success connect to a server
+[2024-04-21 19:18:59] INFO: Data successful sending into the socket
+[2024-04-21 19:19:30] File moved to 'data'.
+[2024-04-21 19:19:30] WARNING: Changes detected in the directory 'data': The data will be sent again.
+[2024-04-21 19:19:30] INFO: Data successful sending into the socket
+[2024-04-21 19:19:37] INFO: successfully created socket
+[2024-04-21 19:19:37] INFO: success connect to a server
+[2024-04-21 19:19:37] INFO: Data successful sending into the socket
+[2024-04-21 19:31:14] INFO: successfully created socket
+[2024-04-21 19:31:14] INFO: success connect to a server
+[2024-04-21 19:31:14] INFO: Data successful sending into the socket
+[2024-04-21 20:10:52] INFO: successfully created socket
+[2024-04-21 20:10:52] INFO: success connect to a server
+[2024-04-21 20:10:52] INFO: Data successful sending into the socket
