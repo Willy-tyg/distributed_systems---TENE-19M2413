@@ -10,9 +10,17 @@
 #include <unistd.h>
 #include <vector>
 #include <mutex>
+#include <thread>
+#include <cstring>
+#include <regex>
+
+
+
 using namespace std;
 
 void* handleClient(void* arg);
 void writeLog(const string& message);
+void supprimerBlocIP(const string& cheminFichier, const string& adresseIP);
 
-#endif // SERVER_H
+
+#endif //SERVER_H

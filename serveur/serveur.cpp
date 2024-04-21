@@ -1,6 +1,4 @@
 #include "serveur.h"
-#include <cstring>
-#include <regex>
 
 struct File {
     string name;
@@ -22,8 +20,6 @@ void writeLog(const string& message) {
     ofstream logFile("log.txt", ios::app);
     if (!logFile) {
         cerr << "Error opening the log file." << endl;
-        writeLog("ERROR: error when opennig the log file");
-
         return;
     }
 
@@ -31,21 +27,16 @@ void writeLog(const string& message) {
     logFile << "[" << timeStr << "] " << message << endl;
 }
 
-
 void supprimerBlocIP(const string& cheminFichier, const string& adresseIP) {
     ifstream fichier(cheminFichier);
     if (!fichier.is_open()) {
         cerr << "Erreur : impossible d'ouvrir le fichier." << endl;
-        writeLog("ERROR: unable to open the file to update him");
-
         return;
     }
 
     ofstream fichierTemp("temp.txt"); // Fichier temporaire pour stocker les lignes restantes
     if (!fichierTemp.is_open()) {
         cerr << "Erreur : impossible de créer le fichier temporaire." << endl;
-        writeLog("ERROR: can't create temporal file: temp.txt");
-
         return;
     }
 
@@ -65,7 +56,6 @@ void supprimerBlocIP(const string& cheminFichier, const string& adresseIP) {
             else{
                fichierTemp << ligne << endl; 
             }
-            
         } else {
             // Vérifier si la ligne contient l'adresse IP spécifiée suivie de ":"
             size_t pos = ligne.find(adresseIP + " :");
@@ -87,9 +77,6 @@ void supprimerBlocIP(const string& cheminFichier, const string& adresseIP) {
     rename("temp.txt", cheminFichier.c_str());
 }
 
-
-
-
 vector<File> deserialize(const string& serializedData) {
     vector<File> files;
 
@@ -106,21 +93,18 @@ vector<File> deserialize(const string& serializedData) {
         }
         dataCopy.erase(0, pos + 1);
     }
-
     return files;
 }
 
 void* handleClient(void* arg) {
-    int clientSocket = *(int*)arg;
-    delete (int*)arg;
+    int clientSocket = *((int*)arg); // Obtenir la valeur du socket client à partir de l'argument
+    delete (int*)arg; // Libérer la mémoire allouée pour le pointeur
 
     // Obtention de l'adresse IP et du numéro de port du client
     sockaddr_in clientAddress;
     socklen_t clientAddressLength = sizeof(clientAddress);
     if (getpeername(clientSocket, (struct sockaddr*)&clientAddress, &clientAddressLength) == -1) {
         cerr << "Erreur lors de l'obtention de l'adresse IP du client." << endl;
-        writeLog("ERROR: error when obtaining the client ip");
-
         close(clientSocket);
         pthread_exit(NULL);
     }
@@ -132,54 +116,67 @@ void* handleClient(void* arg) {
 
     supprimerBlocIP(filePath, clientIP);
     // Réception des données du client
-    char buffer[4096];
-    ssize_t bytesReceived = recv(clientSocket, buffer, sizeof(buffer), 0);
-    if (bytesReceived <= 0) {
-        cerr << "Erreur lors de la réception des données du client " << clientIP << ":" << clientPort << "." << endl;
-        std::ostringstream erreur;
-        erreur << "ERROR: error when obtaining the client data '" << clientIP << "':'" << clientPort << "'";
-        writeLog(erreur.str());
 
-        close(clientSocket);
-        pthread_exit(NULL);
-    }
-
-    // Convertir les données reçues en une chaîne de caractères
-    string receivedData(buffer, bytesReceived);
-
-    // Désérialiser les données
-    vector<File> receivedFiles = deserialize(receivedData);
-
-    // Écrire les données dans un fichier
-    ofstream fichier("infos_client.txt", ios::app);
-    if (fichier.is_open()) {
-        // Écrire les informations de l'adresse IP et du port du client
-        fichier << clientIP << " : " << clientPort << endl;
-
-        // Écrire les informations des fichiers dans le fichier
-        for (const auto& file : receivedFiles) {
-            fichier << file.name << " " << file.size << " octets" << endl;
+    while (true) {
+        char buffer[4096];
+        ssize_t bytesReceived = recv(clientSocket, buffer, sizeof(buffer), 0);
+        if (bytesReceived <= 0) {
+            cerr << "Erreur lors de la réception des données du client " << clientIP << ":" << clientPort << "." << endl;
+            close(clientSocket);
+            pthread_exit(NULL);
         }
-        // Ajouter un retour à la ligne après chaque ensemble d'informations
-        fichier << endl;
 
-        // Fermer le fichier
+        // Convertir les données reçues en une chaîne de caractères
+        string receivedData(buffer, bytesReceived);
+
+        // Désérialiser les données
+        vector<File> receivedFiles = deserialize(receivedData);
+        
+        supprimerBlocIP(filePath, clientIP);
+        // Réception des données du client
+
+        
+
+        static mutex fileMutex;  // Static mutex to ensure exclusive access to the log file
+        lock_guard<mutex> lock(fileMutex);  // Lock the mutex to guarantee exclusive access
+
+        // Open the log file in append mode if it's not already open
+        // Écrire les données dans un fichier
+        ofstream fichier("infos_client.txt", ios::app);
+        if (!fichier) {
+            cerr << "Error opening infos client file." << endl;
+            writeLog("ERROR: Error when opening infos client file.");
+        }
+
+
+        if (fichier.is_open()) {
+            // Écrire les informations de l'adresse IP et du port du client
+            fichier << clientIP << " : " << clientPort << endl;
+
+            // Écrire les informations des fichiers dans le fichier
+            for (const auto& file : receivedFiles) {
+                fichier << file.name << " " << file.size << " octets" << endl;
+            }
+            // Ajouter un retour à la ligne après chaque ensemble d'informations
+            fichier << endl;
+
+            // Fermer le fichier
+            fichier.close();
+            
+            cout << "reception des données du client "<< clientIP << endl;
+            writeLog("INFO: receipt data of client .");
+
+        } else {
+            cerr << "Erreur lors de l'ouverture du fichier infos_client.txt" << endl;
+            writeLog("ERROR: Error when opening infos client file.");
+
+        }
         fichier.close();
-
-        cout << "reception des données du client "<< clientIP << endl;
-        std::ostringstream log_info;
-        log_info << "INFO: data receipt '" << clientIP << "':'" << clientPort << "'";
-        writeLog(log_info.str());
-
-    } else {
-        cerr << "Erreur lors de l'ouverture du fichier infos_client.txt" << endl;
-        writeLog("ERROR: error when openning file infos_client.txt");
-
     }
 
     // Fermer le socket client
     close(clientSocket);
+    
     pthread_exit(NULL);
 }
-
 
