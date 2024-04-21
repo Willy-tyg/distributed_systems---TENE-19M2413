@@ -1,0 +1,6 @@
+[2024-04-21 20:10:47] INFO: the socket creating successful
+[2024-04-21 20:10:47] INFO: the socket linked successful
+[2024-04-21 20:10:47] INFO: the socket is understanding
+[2024-04-21 20:10:52] INFO: connexion accepting success
+[2024-04-21 20:10:52] INFO: thread creating successful
+[2024-04-21 20:10:52] INFO: data receipt '127.0.0.1':'42596'
