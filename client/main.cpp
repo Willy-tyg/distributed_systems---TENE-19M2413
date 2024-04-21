@@ -29,77 +29,6 @@ void writeLog(const string& message) {
 }
 
 
-
-//function to detect the change into the directory 'data'
-int watchDirectory(const string& directoryPath) {
-    int inotifyFd = inotify_init();
-    if (inotifyFd == -1) {
-        cerr << "Error initializing inotify" << endl;
-        writeLog("ERROR: Error initializing inotify");
-        return -1;
-    }
-
-    int watchDescriptor = inotify_add_watch(inotifyFd, directoryPath.c_str(), IN_ALL_EVENTS);
-    if (watchDescriptor == -1) {
-        cerr << "Error adding watch to directory: " << directoryPath << endl;
-        writeLog("ERROR: Error adding watch to directory: '" +directoryPath+"'.");
-        close(inotifyFd);
-        return -1;
-    }
-
-    char buffer[4096];
-    ssize_t bytesRead;
-    bytesRead = read(inotifyFd, buffer, sizeof(buffer));
-    if (bytesRead == -1) {
-        cerr << "Error reading from inotify" << endl;
-        return -1;
-    }
-
-    if (fs::is_directory(directoryPath)) {
-        for (char* ptr = buffer; ptr < buffer + bytesRead;) {
-            struct inotify_event* event = reinterpret_cast<struct inotify_event*>(ptr);
-        
-            if (event->mask & IN_CREATE){
-                writeLog("File created into '" +directoryPath+"'.");
-                return 0;
-            }
-            if (event->mask & IN_DELETE){
-                writeLog("File delete into'" +directoryPath+"'.");
-                return 0;
-            }
-            if (event->mask & IN_MODIFY){
-                writeLog("File modified into '" +directoryPath+"'.");
-                return 0;
-            }
-            if (event->mask & IN_MOVED_FROM){
-                writeLog("File moved from '" +directoryPath+"'.");
-                return 0;
-            }
-            if (event->mask & IN_MOVED_TO){
-                writeLog("File moved to '" +directoryPath+"'.");
-                return 0;
-            }
-
-            ptr += sizeof(struct inotify_event) + event->len;
-        }
-        
-    }
-    else {
-        // Si le dossier n'existe pas, écrire un message d'erreur dans le journal
-        // ou gérer l'erreur d'une autre manière appropriée.
-        writeLog("FATAL: can't detect change into the directory: '"+ directoryPath +"' directory does not exist");
-        return -1;
-    }
-
-    // Clean up
-    close(watchDescriptor);
-    close(inotifyFd);
-
-    return -1;
-}
-
-
-
 // function to serialize
 string serialize(const vector<File>& files) {
     string serializedData;
@@ -168,131 +97,137 @@ void sendData(int socketFd, const vector<File>& files) {
 }
 
 
-int main(){
- 
-    int clientSocket = socket(AF_INET, SOCK_STREAM, 0);
-    if(clientSocket != -1){
-        writeLog("INFO: successfully created socket");
-    }
-    else{
-        writeLog("ERROR: error when creating socket");
-        perror("error when creating socket");
+int main() {
+    // Initialisation de la surveillance du répertoire
+    int inotifyFd = inotify_init();
+    if (inotifyFd == -1) {
+        cerr << "Error initializing inotify" << endl;
+        writeLog("ERROR: Error initializing inotify");
+        return -1;
     }
 
-    // specify the server address
+    string directoryPath = "data";  // Répertoire des fichiers à surveiller
+    int watchDescriptor = inotify_add_watch(inotifyFd, directoryPath.c_str(), IN_ALL_EVENTS);
+    if (watchDescriptor == -1) {
+        cerr << "Error adding watch to directory: " << directoryPath << endl;
+        writeLog("ERROR: Error adding watch to directory: '" + directoryPath + "'.");
+        close(inotifyFd);
+        return -1;
+    }
+
+    // Initialisation de la connexion au serveur
+    int clientSocket = socket(AF_INET, SOCK_STREAM, 0);
+    if (clientSocket != -1) {
+        writeLog("INFO: successfully created socket");
+    } else {
+        writeLog("ERROR: error when creating socket");
+        perror("error when creating socket");
+        close(inotifyFd); // Fermer le descripteur de fichier inotify
+        return -1;
+    }
+
+    // Spécifier l'adresse du serveur et se connecter à celui-ci
     sockaddr_in serverAddress;
     serverAddress.sin_family = AF_INET;
     serverAddress.sin_port = htons(10000);
     serverAddress.sin_addr.s_addr = inet_addr("127.0.0.1");
 
-    // connect to a server
     if (connect(clientSocket, (struct sockaddr*)&serverAddress, sizeof(serverAddress)) == -1) {
         perror("error when connect to a server");
         writeLog("ERROR: error when connect to a server");
-        close(clientSocket);
-        return 1;
-    }else{
+        close(clientSocket); // Fermer le descripteur de fichier du socket
+        close(inotifyFd);    // Fermer le descripteur de fichier inotify
+        return -1;
+    } else {
         writeLog("INFO: success connect to a server");
     }
 
-    string directoryPath = "data";  // directory of file
+    // Envoyer les données initiales au socket
     vector<File> files = getFileInfo(directoryPath);
-
-    // send the data into the socket
-
     sendData(clientSocket, files);
 
-    
-    while(true){
-
-        int inotifyFd = inotify_init();
-        if (inotifyFd == -1) {
-            cerr << "Error initializing inotify" << endl;
-            writeLog("ERROR: Error initializing inotify");
-            return -1;
-        }
-
-        int watchDescriptor = inotify_add_watch(inotifyFd, directoryPath.c_str(), IN_ALL_EVENTS);
-        if (watchDescriptor == -1) {
-            cerr << "Error adding watch to directory: " << directoryPath << endl;
-            writeLog("ERROR: Error adding watch to directory: '" +directoryPath+"'.");
-            close(inotifyFd);
-            return -1;
-        }
-
+    while (true) {
+        // Lecture des événements inotify (non bloquante)
         char buffer[4096];
         ssize_t bytesRead;
         bytesRead = read(inotifyFd, buffer, sizeof(buffer));
+
         if (bytesRead == -1) {
             cerr << "Error reading from inotify" << endl;
-            return -1;
-        }
+            writeLog("ERROR: Error reading from inotify");
+            // Gérer l'erreur selon les besoins
+        } else {
 
-        if (fs::is_directory(directoryPath)) {
-            for (char* ptr = buffer; ptr < buffer + bytesRead;) {
-                struct inotify_event* event = reinterpret_cast<struct inotify_event*>(ptr);
-            
-                if (event->mask & IN_CREATE){
-                    writeLog("File created into '" +directoryPath+"'.");
-                    cerr << "change detect into the directory"<< directoryPath << endl;
-                    writeLog("WARNING: Changes detected in the directory '" + directoryPath + "': The data will be sent again.");
+            if (fs::is_directory(directoryPath)) {
+                for (char* ptr = buffer; ptr < buffer + bytesRead;) {
+                    struct inotify_event* event = reinterpret_cast<struct inotify_event*>(ptr);
+                
+                    if (event->mask & IN_CREATE){
+                        writeLog("File created into '" +directoryPath+"'.");
+                        cerr << "change detect into the directory"<< directoryPath << endl;
+                        writeLog("WARNING: Changes detected in the directory '" + directoryPath + "': The data will be sent again.");
 
-                    vector<File> filesc = getFileInfo(directoryPath);
-                    // Envoyer les données sur le socket
-                    sendData(clientSocket, filesc);
+                        vector<File> filesc = getFileInfo(directoryPath);
+                        // Envoyer les données sur le socket
+                        sendData(clientSocket, filesc);
+                    }
+                    if (event->mask & IN_DELETE){
+                        writeLog("File delete into'" +directoryPath+"'.");
+                        cerr << "change detect into the directory"<< directoryPath << endl;
+                        writeLog("WARNING: Changes detected in the directory '" + directoryPath + "': The data will be sent again.");
+
+                        vector<File> filesd = getFileInfo(directoryPath);
+                        // Envoyer les données sur le socket
+                        sendData(clientSocket, filesd);
+                    }
+                    if (event->mask & IN_MODIFY){
+                        writeLog("File modified into '" +directoryPath+"'.");
+                        cerr << "change detect into the directory"<< directoryPath << endl;
+                        writeLog("WARNING: Changes detected in the directory '" + directoryPath + "': The data will be sent again.");
+
+                        vector<File> filesm = getFileInfo(directoryPath);
+                        // Envoyer les données sur le socket
+                        sendData(clientSocket, filesm);
+                    }
+                    if (event->mask & IN_MOVED_FROM){
+                        writeLog("File moved from '" +directoryPath+"'.");
+                        cerr << "change detect into the directory"<< directoryPath << endl;
+                        writeLog("WARNING: Changes detected in the directory '" + directoryPath + "': The data will be sent again.");
+
+                        vector<File> filesf = getFileInfo(directoryPath);
+                        // Envoyer les données sur le socket
+                        sendData(clientSocket, filesf);
+                    }
+                    if (event->mask & IN_MOVED_TO){
+                        writeLog("File moved to '" +directoryPath+"'.");
+                        cerr << "change detect into the directory"<< directoryPath << endl;
+                        writeLog("WARNING: Changes detected in the directory '" + directoryPath + "': The data will be sent again.");
+
+                        vector<File> filest = getFileInfo(directoryPath);
+                        // Envoyer les données sur le socket
+                        sendData(clientSocket, filest);
+                    }
+
+                    ptr += sizeof(struct inotify_event) + event->len;
                 }
-                if (event->mask & IN_DELETE){
-                    writeLog("File delete into'" +directoryPath+"'.");
-                    cerr << "change detect into the directory"<< directoryPath << endl;
-                    writeLog("WARNING: Changes detected in the directory '" + directoryPath + "': The data will be sent again.");
-
-                    vector<File> filesd = getFileInfo(directoryPath);
-                    // Envoyer les données sur le socket
-                    sendData(clientSocket, filesd);
-                }
-                if (event->mask & IN_MODIFY){
-                    writeLog("File modified into '" +directoryPath+"'.");
-                    cerr << "change detect into the directory"<< directoryPath << endl;
-                    writeLog("WARNING: Changes detected in the directory '" + directoryPath + "': The data will be sent again.");
-
-                    vector<File> filesm = getFileInfo(directoryPath);
-                    // Envoyer les données sur le socket
-                    sendData(clientSocket, filesm);
-                }
-                if (event->mask & IN_MOVED_FROM){
-                    writeLog("File moved from '" +directoryPath+"'.");
-                    cerr << "change detect into the directory"<< directoryPath << endl;
-                    writeLog("WARNING: Changes detected in the directory '" + directoryPath + "': The data will be sent again.");
-
-                    vector<File> filesf = getFileInfo(directoryPath);
-                    // Envoyer les données sur le socket
-                    sendData(clientSocket, filesf);
-                }
-                if (event->mask & IN_MOVED_TO){
-                    writeLog("File moved to '" +directoryPath+"'.");
-                    cerr << "change detect into the directory"<< directoryPath << endl;
-                    writeLog("WARNING: Changes detected in the directory '" + directoryPath + "': The data will be sent again.");
-
-                    vector<File> filest = getFileInfo(directoryPath);
-                    // Envoyer les données sur le socket
-                    sendData(clientSocket, filest);
-                }
-
-                ptr += sizeof(struct inotify_event) + event->len;
+                
             }
-            
-        }
-        else {
-            // Si le dossier n'existe pas, écrire un message d'erreur dans le journal
-            // ou gérer l'erreur d'une autre manière appropriée.
-            writeLog("FATAL: can't detect change into the directory: '"+ directoryPath +"' directory does not exist");
-            return -1;
+            else {
+                // Si le dossier n'existe pas, écrire un message d'erreur dans le journal
+                // ou gérer l'erreur d'une autre manière appropriée.
+                writeLog("FATAL: can't detect change into the directory: '"+ directoryPath +"' directory does not exist");
+                return -1;
+            }
+
         }
 
-        // Clean up
-        close(watchDescriptor);
-        close(inotifyFd);
-
+        sleep(1); // Attendre 1 seconde avant la prochaine vérification
     }
 
+    // Nettoyage
+    close(watchDescriptor);
+    close(inotifyFd);
+    close(clientSocket);
+
+    return 0;
 }

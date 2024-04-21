@@ -12,6 +12,7 @@
 #include <cstdio>
 #include <cerrno>
 #include <vector>
+#include <netdb.h>
 #include <filesystem>
 #include <sys/inotify.h>
 
