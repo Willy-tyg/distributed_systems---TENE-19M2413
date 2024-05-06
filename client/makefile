@@ -1,8 +1,8 @@
 CC = g++
-CFLAGS = -Wall -Wextra -std=c++17 -pthread
+CFLAGS = -Wall -Wextra -std=c++17 -pthread 
 
 client: main.o
-	$(CC) $(CFLAGS) $^ -o $@
+	$(CC) $(CFLAGS) $^ -o $@ -lcurl
 main.o: main.cpp client.h
 	$(CC) $(CFLAGS) -c $<
 

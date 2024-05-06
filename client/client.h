@@ -15,6 +15,9 @@
 #include <netdb.h>
 #include <filesystem>
 #include <sys/inotify.h>
+#include <curl/curl.h>
+#include <sys/stat.h>
+
 
 
 using namespace std;
