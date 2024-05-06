@@ -17,10 +17,37 @@
 
 
 using namespace std;
+struct File {
+    string name;
+    int size;
+};
+
+struct ThreadArgs {
+    int clientSocket;
+    ssize_t bytesReceived;
+    int clientPort;
+    string clientIP;
+};
+
+struct DownloadArgs {
+    int clientSocket;
+    ssize_t bytesReceived;
+    int clientPort;
+    string clientIP;
+    string file_to_download;
+    string url_ftp;
+};
+
+struct ClientData {
+    std::string ip;
+    int socket;
+};
 
 void* handleClient(void* arg);
+void* sendFileList(void *arg);
 void writeLog(const string& message);
 void supprimerBlocIP(const string& cheminFichier, const string& adresseIP);
+string serialize(const vector<File>& files);
 
 
 #endif //SERVER_H
