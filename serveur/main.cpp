@@ -15,11 +15,19 @@ int main()
         writeLog("INFO: the socket creating successful");
     }
 
+
+    // Définir l'option SO_REUSEADDR
+    int reuse = 1;
+    if (setsockopt(serverSocket, SOL_SOCKET, SO_REUSEADDR, &reuse, sizeof(reuse)) == -1) {
+        perror("Error setting SO_REUSEADDR option");
+        return 1;
+    }
+
     // spécification de l'adresse
     sockaddr_in serverAddress;
     serverAddress.sin_family = AF_INET;
     serverAddress.sin_port = htons(10000);
-    serverAddress.sin_addr.s_addr = inet_addr("127.0.0.1");
+    serverAddress.sin_addr.s_addr = inet_addr("192.168.98.97");
 
     // liaison du socket
     if (bind(serverSocket, (struct sockaddr*)&serverAddress, sizeof(serverAddress)) == -1) {
@@ -72,7 +80,6 @@ int main()
             writeLog("INFO: thread creating successful");
         }
     }
-
     // fermeture du socket serveur
     close(serverSocket);
 

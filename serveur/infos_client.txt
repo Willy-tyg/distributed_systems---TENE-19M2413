@@ -1,27 +1,12 @@
-127.78.0.1 : 55548
-fichiers.txt 14 octets
-main.o 123160 octets
-main.cpp 6058 octets
-5-socket.pdf 270145 octets
-infos_client.txt 260 octets
+192.168.98.77 : 52086
 INF4208_Part1_Wireless Networks.pdf 1988947 octets
-ggt.txt 7 octets
-
-127.7.0.1 : 55548
-fichiers.txt 14 octets
-main.o 123160 octets
-main.cpp 6058 octets
-5-socket.pdf 270145 octets
-infos_client.txt 260 octets
-INF4208_Part1_Wireless Networks.pdf 1988947 octets
-ggt.txt 7 octets
-
-127.0.0.1 : 60836
-fichiers.txt 14 octets
-main.o 123160 octets
-main.cpp 6058 octets
 serveur.cpp 0 octets
 infos_client.txt 260 octets
-INF4208_Part1_Wireless Networks.pdf 1988947 octets
-ggt.txt 7 octets
+main.cpp 6058 octets
+
+192.168.98.174 : 46606
+Document 1 sans titren 214 octets
+xcp 1029 octets
+process.c 5541 octets
+c.c 894 octets
 
