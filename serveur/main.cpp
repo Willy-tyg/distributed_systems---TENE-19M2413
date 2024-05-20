@@ -1,7 +1,7 @@
 #include "serveur.h"
 
 
-
+//main function
 int main()
 {
     // création du socket
@@ -20,14 +20,17 @@ int main()
     int reuse = 1;
     if (setsockopt(serverSocket, SOL_SOCKET, SO_REUSEADDR, &reuse, sizeof(reuse)) == -1) {
         perror("Error setting SO_REUSEADDR option");
+        writeLog("ERROR: error when define option SO_REUSEADDR for reuse address");
         return 1;
     }
 
     // spécification de l'adresse
     sockaddr_in serverAddress;
     serverAddress.sin_family = AF_INET;
-    serverAddress.sin_port = htons(10000);
-    serverAddress.sin_addr.s_addr = inet_addr("192.168.98.97");
+    int port = 10000;
+    serverAddress.sin_port = htons(port);
+    serverAddress.sin_addr.s_addr = inet_addr("192.168.32.174");
+
 
     // liaison du socket
     if (bind(serverSocket, (struct sockaddr*)&serverAddress, sizeof(serverAddress)) == -1) {
@@ -51,8 +54,13 @@ int main()
         writeLog("INFO: the socket is understanding");
     }
 
+    std::ofstream("infos_client.txt", std::ofstream::out | std::ofstream::trunc).close();
+
+
     // Créer un thread pour gérer chaque client
+    cout<<"serveur en ecoute sur le port : "<<port<<endl;
     while (true) {
+
         // accepter la demande de connexion
         sockaddr_in clientAddress;
         socklen_t clientAddressLength = sizeof(clientAddress);
@@ -67,6 +75,12 @@ int main()
             writeLog("INFO: connection accepting success");
         }
 
+        char clientIP[INET_ADDRSTRLEN];
+        inet_ntop(AF_INET, &(clientAddress.sin_addr), clientIP, INET_ADDRSTRLEN);
+
+        cout<<" "<<endl;
+        cout<<"le client: "<< clientIP <<" s'est connécté"<<endl;
+        
         // Créer un thread pour gérer le client
         pthread_t thread;
         if (pthread_create(&thread, NULL, handleClient, (void*)clientSocket) != 0) {
@@ -79,6 +93,8 @@ int main()
         else{
             writeLog("INFO: thread creating successful");
         }
+
+
     }
     // fermeture du socket serveur
     close(serverSocket);

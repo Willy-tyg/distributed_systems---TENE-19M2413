@@ -1,11 +1,29 @@
 #include "serveur.h"
 
+
 //mutex pour verouiller le vecteur clientData
 std::mutex client_mutex;
 
-//vecteur pour stocker les adresses ip et socket des differents clients
+//mutex pour verouiller le fichier infos_client.txt
+std::mutex info_mutex;
+
+
+//mutex pour verrouiller les fichiers temporaires
+std::mutex temp_mutex;
+std::mutex temp1_mutex;
+std::mutex temp2_mutex;
+
+//mutex pour verouiller le vecteur File
+std::mutex file_mutex;
+
+
+
 std::vector<ClientData> clients;
 
+
+const size_t INITIAL_BUFFER_SIZE = 4096;
+
+//log function
 void writeLog(const string& message) {
     // Get the current date and time
     time_t now = time(nullptr);
@@ -27,16 +45,48 @@ void writeLog(const string& message) {
     logFile << "[" << timeStr << "] " << message << endl;
 }
 
+//function to deserialize data
+vector<File> deserialize(const string& serializedData) {
+    vector<File> files;
+
+    file_mutex.lock();
+    string dataCopy = serializedData; // Copy of the serialized data
+
+    size_t pos = 0;
+    while ((pos = dataCopy.find(";")) != string::npos) {
+        string token = dataCopy.substr(0, pos);
+        size_t commaPos = token.find(",");
+        if (commaPos != string::npos) {
+            string name = token.substr(0, commaPos);
+            int size = stoi(token.substr(commaPos + 1));
+            files.push_back({name, size});
+        }
+        dataCopy.erase(0, pos + 1);
+    }
+    file_mutex.unlock();
+    return files;
+}
+
+
+//function to remove client and their file
+
 void supprimerBlocIP(const string& cheminFichier, const string& adresseIP) {
+
+    info_mutex.lock();
     ifstream fichier(cheminFichier);
     if (!fichier.is_open()) {
         cerr << "Error opening the file." << endl;
+                writeLog("ERROR: Error creating the temporary file.");
+
         return;
     }
 
+    temp_mutex.lock();
     ofstream fichierTemp("temp.txt"); // Temporary file to store the remaining lines
     if (!fichierTemp.is_open()) {
         cerr << "Error creating the temporary file." << endl;
+        writeLog("ERROR: Error creating the temporary file.");
+
         return;
     }
 
@@ -69,152 +119,26 @@ void supprimerBlocIP(const string& cheminFichier, const string& adresseIP) {
     }
 
     fichier.close();
+    
     fichierTemp.close();
+    temp_mutex.unlock();
 
     // Replace the original file with the temporary file
     remove(cheminFichier.c_str());
     rename("temp.txt", cheminFichier.c_str());
-}
-
-vector<File> deserialize(const string& serializedData) {
-    vector<File> files;
-
-    string dataCopy = serializedData; // Copy of the serialized data
-
-    size_t pos = 0;
-    while ((pos = dataCopy.find(";")) != string::npos) {
-        string token = dataCopy.substr(0, pos);
-        size_t commaPos = token.find(",");
-        if (commaPos != string::npos) {
-            string name = token.substr(0, commaPos);
-            int size = stoi(token.substr(commaPos + 1));
-            files.push_back({name, size});
-        }
-        dataCopy.erase(0, pos + 1);
-    }
-    return files;
+    info_mutex.unlock();
 }
 
 
-int getClientSocketByIP(const std::string& clientIP) {
-    client_mutex.lock();
-
-    int clientSocket = -1;  // Valeur par défaut si l'adresse IP n'est pas trouvée
-
-    // Parcourez la structure de données pour rechercher l'IP et récupérer le socket correspondant
-
-    for (const auto& client : clients) {
-        if (client.ip == clientIP) {
-            clientSocket = client.socket;
-            break;
-        }
-
-    }
-    return clientSocket;
-}
-
-
-
-
-
-void* DownloadFile(void* arg){
-    DownloadArgs* downloadArgs = static_cast<DownloadArgs*>(arg);
-    int clientSocket = downloadArgs->clientSocket;
-    string clientIP = downloadArgs->clientIP;
-    string file_to_download= downloadArgs->file_to_download;
-    string url_ftp = downloadArgs->url_ftp;
-
-    ifstream infoFile("infos_client.txt");
-    if (!infoFile) {
-        cerr << "Erreur: Impossible d'ouvrir le fichier infos_client.txt." << endl;
-        return nullptr;
-    }
-
-    string line;
-    string ipAddress;
-
-    // Commence à lire le fichier depuis le début
-    infoFile.clear();
-    infoFile.seekg(0);
-
-    bool found = false;
-    // Lire chaque ligne du fichier
-    while (getline(infoFile, line)) {
-        // Vérifier si la ligne contient une adresse IP
-        if (line.find(":") != string::npos && line.find(".") != string::npos) {
-            // Stocker l'adresse IP trouvée
-            ipAddress = line;
-        }
-        // Vérifier si la ligne correspond à la chaîne de recherche
-        if (line == file_to_download) {
-            // Si la chaîne de recherche est trouvée, extraire l'adresse IP de la ligne
-            size_t spacePos = ipAddress.find('string url_ftp = downloadArgs->url_ftp; ');
-            ipAddress = ipAddress.substr(0, spacePos);
-            found = true;
-            break; // Sortir de la boucle une fois que la chaîne est trouvée
-        }
-    }
-
-    if (!found) {
-        ipAddress = ""; // Assigner une valeur vide à ipAddress si la chaîne de recherche n'est pas trouvée
-    }
-
-    std::string message; // Message à envoyer au client
-
-    if (!ipAddress.empty()) {
-        message = "POSITIVE"; // Message positif si une adresse IP est trouvée
-        std::cout << "adresse IP de l'hôte qui détient le fichier '" << file_to_download << "' : " << ipAddress << std::endl;
-    } else {
-        message = "NEGATIVE"; // Message négatif si aucune adresse IP n'est trouvée
-        std::cout << "Aucune adresse IP trouvée pour le fichier '" << file_to_download << "'." << std::endl;
-        return nullptr;
-    }
-
-    // Envoi du message au client pour lui dire si le fichier est disponible ou pas
-    if (send(clientSocket, message.c_str(), message.size(), 0) == -1) {
-        std::cerr << "Erreur lors de l'envoi du message au client." << std::endl;
-    }
-
-   
-    int targetSocket = getClientSocketByIP(clientIP);
-    cout<<"socket du client qui detient le fichier"<< file_to_download << ":" <<targetSocket<<endl;
-    //  Envoyer un message au client detenteur du fichier pur qu'il le partage avec le demandeur
-    const char* request = "SEND_FILE";
-    int requestSize = strlen(request) + 1;
-    const char* file_to_send = file_to_download.c_str();
-    int fileInfoSize = file_to_download.size() + 1;
-    std::string ipToSend = clientIP;
-    int ipToSendSize =ipAddress.size()+1;
-    int url_ftp_size = url_ftp.size()+1; // Obtient la taille de la chaîne de caractères url_ftp
-
-
-
-
-    // Concaténer la demande et les informations du fichier
-    std::string requestData(request);
-    requestData += "\n";  // Ajouter une nouvelle ligne pour séparer la demande et les informations
-    requestData += file_to_download;
-    requestData += "\n";  // Ajouter une nouvelle ligne 
-    requestData += ipToSend;
-    requestData += "\n";  // Ajouter une nouvelle ligne 
-    requestData += url_ftp;
-
-    // Envoyer la demande et les informations du fichier au serveur
-    if (send(targetSocket, requestData.c_str(), requestData.size(), 0) == -1) {
-        perror("Erreur lors de l'envoi de la demande et des informations du fichier");
-    }
-
-    return nullptr;
-}
-
-
+//function to send the list of file to a client when asking
 
 void* sendFileList(void* arg) {
     ThreadArgs* threadArgs = static_cast<ThreadArgs*>(arg);
     int clientSocket = threadArgs->clientSocket;
     string clientIP = threadArgs->clientIP;
 
-    vector<File> files;
+
+    info_mutex.lock();
     ifstream fichier("infos_client.txt"); // Ouvrir le fichier
 
     if (!fichier.is_open()) {
@@ -224,12 +148,13 @@ void* sendFileList(void* arg) {
         cout << "File opened successfully." << endl;
     }
 
-    ofstream fichierTemp("temp.txt"); // Fichier temporaire pour stocker les lignes restantes
+    temp2_mutex.lock();
+
+    ofstream fichierTemp("temp2.txt"); // Fichier temporaire pour stocker les lignes restantes
     if (!fichierTemp.is_open()) {
         cerr << "Error creating the temporary file." << endl;
         fichier.close();
         close(clientSocket);
-        pthread_exit(nullptr);
     }
 
     string ligne;
@@ -272,12 +197,14 @@ void* sendFileList(void* arg) {
     fichierTemp.close();
     fichier.close();
 
+    info_mutex.unlock();
+
     // Ouvrir le fichier temporaire pour lire son contenu
-    ifstream tempFile("temp.txt");
+    
+    ifstream tempFile("temp2.txt");
     if (!tempFile.is_open()) {
         cerr << "Error opening the temporary file." << endl;
         close(clientSocket);
-        pthread_exit(nullptr);
     } else {
         cout << "Temporary file opened successfully." << endl;
     }
@@ -285,28 +212,205 @@ void* sendFileList(void* arg) {
     // Lire le contenu du fichier temporaire
     string fileContents((istreambuf_iterator<char>(tempFile)), istreambuf_iterator<char>());
     tempFile.close();
+    temp2_mutex.unlock();
+
+    // Ajouter une première ligne au contenu du fichier
+    std::string firstLine = "LIST_FILE";
+    fileContents.insert(0, firstLine + "\n");
+
+    // Ajouter une ligne à la fin de fileContents
+    std::string newLineToAdd = "END_OF_FILE";
+    fileContents += newLineToAdd + "\n";
 
     // Envoyer le contenu du fichier au client
     ssize_t bytesSent = send(clientSocket, fileContents.c_str(), fileContents.size(), 0);
     if (bytesSent == -1) {
-        cerr << "Error sending file contents to the client." << endl;
+        cerr << "Error sending file list to the client " << endl;
+        writeLog("ERROR: Error sending file list to the client '"+ clientIP +"'");
         close(clientSocket);
-        pthread_exit(nullptr);
     } else {
-        cout << "File contents sent successfully to the client." << endl;
+        cout << "File contents sent successfully to the client "<<clientIP << endl;
+        writeLog("INFO : File contents sent successfully to the client '"+ clientIP +"'");
     }
 
     // Supprimer le fichier temporaire
-    if (remove("temp.txt") != 0) {
-        cerr << "Error deleting temporary file." << endl;
+    if (remove("temp2.txt") != 0) {
+        writeLog( "ERROR: Error deleting temporary file.");
+    } 
+    return nullptr;
+}
+
+
+int getClientSocketByIP(const std::string& clientIP) {
+    client_mutex.lock();
+
+    int clientSocket = -1;  // Valeur par défaut si l'adresse IP n'est pas trouvée
+
+    // Parcourez la structure de données pour rechercher l'IP et récupérer le socket correspondant
+
+    for (const auto& client : clients) {
+        if (client.ip == clientIP) {
+            clientSocket = client.socket;
+            break;
+        }
+
+    }
+    client_mutex.unlock();
+    return clientSocket;
+}
+
+
+
+
+
+void* DownloadFile(void* arg){
+    DownloadArgs* downloadArgs = static_cast<DownloadArgs*>(arg);
+    int clientSocket = downloadArgs->clientSocket;
+    string clientIP = downloadArgs->clientIP;
+    string file_to_download= downloadArgs->file_to_download;
+    string myIP = downloadArgs->myIP;
+
+    info_mutex.lock();
+    ifstream fichier("infos_client.txt");
+    if (!fichier.is_open()) {
+        cerr << "Error opening the file." << endl;
+                writeLog("ERROR: Error creating the temporary file.");
+
+        return nullptr;
+    }
+
+    temp1_mutex.lock();
+    ofstream fichierTemp("temp1.txt"); // Temporary file to store the remaining lines
+    if (!fichierTemp.is_open()) {
+        cerr << "Error creating the temporary file." << endl;
+        writeLog("ERROR: Error creating the temporary file.");
+
+        return nullptr;
+    }
+
+    string ligne;
+    bool blocTrouve = false;
+    bool nouvelleAdresseIP = false;
+    // Read the lines of the file
+    while (getline(fichier, ligne)) {
+        if (blocTrouve) {
+            // Write the remaining lines to the temporary file
+            if (!nouvelleAdresseIP) {
+                if (ligne.find(':') != string::npos) {
+                    nouvelleAdresseIP = true;
+                    fichierTemp << ligne << endl;
+                }
+            } else {
+                fichierTemp << ligne << endl;
+            }
+        } else {
+            // Check if the line contains the specified IP address followed by a colon
+            size_t pos = ligne.find(myIP + " :");
+            if (pos != string::npos) {
+                // If yes, mark the beginning of the block to be deleted
+                blocTrouve = true;
+            } else {
+                // If not, write the line to the temporary file
+                fichierTemp << ligne << endl;
+            }
+        }
+    }
+
+    fichier.close();
+    
+    fichierTemp.close();
+
+    info_mutex.unlock();    
+
+
+
+
+    ifstream infoFile("temp1.txt");
+    if (!infoFile) {
+        writeLog("Erreur: Impossible d'ouvrir le fichier temp1.txt.");
+        return nullptr;
+    }
+
+    string line;
+    string ipAddress;
+
+    // Commence à lire le fichier depuis le début
+    infoFile.clear();
+    infoFile.seekg(0);
+
+    bool found = false;
+    // Lire chaque ligne du fichier
+    while (getline(infoFile, line)) {
+        // Vérifier si la ligne contient une adresse IP
+        if (line.find(":") != string::npos && line.find(".") != string::npos) {
+            // Stocker l'adresse IP trouvée
+            ipAddress = line;
+        }
+        // Vérifier si la ligne correspond à la chaîne de recherche
+        if (line == file_to_download) {
+            // Si la chaîne de recherche est trouvée, extraire l'adresse IP de la ligne
+            size_t spacePos = ipAddress.find(' ');
+            ipAddress = ipAddress.substr(0, spacePos);
+            found = true;
+            break; // Sortir de la boucle une fois que la chaîne est trouvée
+        }
+    }
+
+    temp1_mutex.unlock();
+    remove("temp1.txt");
+
+    if (!found) {
+        ipAddress = ""; // Assigner une valeur vide à ipAddress si la chaîne de recherche n'est pas trouvée
+        return nullptr;
+    }
+
+    std::string message; // Message à envoyer au client
+
+    if (!ipAddress.empty()) {
+        message = "POSITIVE:" + clientIP;
+        std::cout << "adresse IP de l'hôte qui détient le fichier '" << file_to_download << "' : " << ipAddress << std::endl;
     } else {
-        cout << "Temporary file deleted successfully." << endl;
+        message = "NEGATIVE"; // Message négatif si aucune adresse IP n'est trouvée
+        std::cout << "Aucune adresse IP trouvée pour le fichier '" << file_to_download << "'." << std::endl;
+        return nullptr;
+    }
+
+    // Envoi du message au client pour lui dire si le fichier est disponible ou pas
+    if (send(clientSocket, message.c_str(), message.size(), 0) == -1) {
+        std::cerr << "Erreur lors de l'envoi du message au client." << std::endl;
+    }
+
+    int targetSocket = getClientSocketByIP(ipAddress);
+    cout<<"socket du client qui detient le fichier"<< file_to_download << ":" <<targetSocket<<endl;
+    //  Envoyer un message au client detenteur du fichier pur qu'il le partage avec le demandeur
+    const char* request = "SEND_FILE";
+    const char* file_to_send = file_to_download.c_str();
+    std::string ipToSend = clientIP;
+
+
+
+
+    // Concaténer la demande et les informations du fichier
+    std::string requestData(request);
+    requestData += "\n";  // Ajouter une nouvelle ligne pour séparer la demande et les informations
+    requestData += file_to_send;
+    requestData += "\n";  // Ajouter une nouvelle ligne 
+    requestData += ipToSend;
+
+    // Envoyer la demande et les informations du fichier au client
+    if (send(targetSocket, requestData.c_str(), requestData.size(), 0) == -1) {
+        perror("Erreur lors de l'envoi de la demande de transfert du fichier");
+        writeLog("ERREUR: Erreur lors de l'envoi la demande de transfert du fichier");
+
+
+    }else{
+        cout<<"le client "<< ipAddress <<" doit envoyer le fichier "<< file_to_download << " au client "<< clientIP<<endl;
     }
 
     return nullptr;
 }
 
-
+//function to receive client
 void* handleClient(void* arg) {
     int* argPtr = (int*)arg;
     int clientSocket = *argPtr;
@@ -323,6 +427,7 @@ void* handleClient(void* arg) {
     }
     char clientIP[INET_ADDRSTRLEN];
     inet_ntop(AF_INET, &(clientAddress.sin_addr), clientIP, INET_ADDRSTRLEN);
+    
     int clientPort = ntohs(clientAddress.sin_port); // Convert the port number to an integer
     string filePath = "infos_client.txt";
 
@@ -337,162 +442,153 @@ void* handleClient(void* arg) {
     client_mutex.unlock();
 
 
+
+
     while (true) {
         char buffer[4096];
         ssize_t bytesReceived = recv(clientSocket, buffer, sizeof(buffer), 0);
         if (bytesReceived <= 0) {
-            cerr << "Erreur lors de la réception des données du client " << clientIP << ":" << clientPort << "." << endl;
-            close(clientSocket);
-            pthread_exit(NULL);
-        }
+                // Le client s'est déconnecté
+                cout<<" "<<endl;
+                cerr << "Le client " << clientIP << " s'est déconnecté." << endl;
 
-        // Convertir les données reçues en une chaîne
-        std::string receivedData(buffer, bytesReceived);
+                client_mutex.lock();
+                // Parcourir le vecteur clients
+                for (auto it = clients.begin(); it != clients.end(); ++it) {
+                    // Vérifier si l'adresse IP correspond
+                    if (it->ip == clientIP) {
+                        // Supprimer l'entrée du vecteur
+                        clients.erase(it);
+                        break; // Sortir de la boucle après avoir supprimé l'entrée
+                    }
+                }
+                client_mutex.unlock();
 
-        // Vérifier si le tampon contient plusieurs lignes
-        size_t newlinePos = receivedData.find('\n');
-        if (newlinePos != std::string::npos) {
-            pthread_t thread;
-            // Le tampon contient plusieurs lignes
-            // Extraire la demande et les informations du fichier
+                close(clientSocket);
 
-            // Trouver la position du premier saut de ligne
+                pthread_exit(NULL);  
+        }else{
+
+        
+
+            // Convertir les données reçues en une chaîne
+            std::string receivedData(buffer, bytesReceived);
+
+            // Vérifier si le tampon contient plusieurs lignes
             size_t newlinePos = receivedData.find('\n');
+            if (newlinePos != std::string::npos) {
+                
+                // Le tampon contient plusieurs lignes
+                // Extraire la demande et les informations du fichier
 
-            // Extraire la demande du serveur
-            std::string request = receivedData.substr(0, newlinePos);
+                // Trouver la position du premier saut de ligne
+                size_t newlinePos = receivedData.find('\n');
 
-            // Extraire le reste de la réponse (les informations du fichier, le nom d'utilisateur et le mot de passe)
-            std::string remainingData = receivedData.substr(newlinePos + 1);
-
-            // Trouver la position du deuxième saut de ligne (séparateur entre les informations du fichier et le nom d'utilisateur)
-            newlinePos = remainingData.find('\n');
-
-            // Extraire les informations du fichier
-            std::string fileInfo = remainingData.substr(0, newlinePos);
-
-            // Extraire le reste de la réponse (le nom d'utilisateur et le mot de passe)
-            std::string remainingData2 = remainingData.substr(newlinePos + 1);
-
-            // Trouver la position du troisième saut de ligne (séparateur entre le nom d'utilisateur et le mot de passe)
-            newlinePos = remainingData2.find('\n');
-
-            // Extraire le nom d'utilisateur
-            std::string username_ftp = remainingData2.substr(0, newlinePos);
-
-            // Extraire le mot de passe
-            std::string password_ftp = remainingData2.substr(newlinePos + 1);
-            
-            int port = 21; // Port FTP
-
-            // Formater l'URL FTP
-            std::string url_ftp = "ftp://" + username_ftp + ":" + password_ftp + "@" + clientIP + ":" + std::to_string(port) + "/";
-
-            // Afficher la demande et les informations du fichier
-            cout << "Demande : " << request << endl;
-            cout << "Informations du fichier : " << fileInfo << endl;
-
-            if (request.find("DOWNLOAD_FILE") != std::string::npos) {
-                    // Créer une instance de ThreadArgs pour stocker les valeurs
-                    DownloadArgs* downloadArgs = new DownloadArgs;
-                    downloadArgs->clientSocket = clientSocket;
-                    downloadArgs->bytesReceived = bytesReceived;
-                    downloadArgs->clientPort = clientPort;
-                    downloadArgs->clientIP = inet_ntoa(clientAddress.sin_addr);
-                    downloadArgs->file_to_download = fileInfo;
-                    downloadArgs->url_ftp = url_ftp;
-
-
-                    if (pthread_create(&thread, nullptr, DownloadFile, downloadArgs) != 0) {
-                        cerr << "Erreur lors de la création du thread." << endl;
-                        writeLog("ERROR: error when creating tdu thread qui se chargera d'initier le telechargement");
-                        close(clientSocket);
-                        continue;
-                    }
-                    else{
-                        writeLog("INFO: thread successful");
-                    }
-
-                }
-        } else {
-
-            std::string request(buffer, bytesReceived);
-            pthread_t thread;
+                // Extraire la demande du client
+                std::string request = receivedData.substr(0, newlinePos);
+                cout<<" "<<endl;
+                cout<<"request : "<<request<<endl;
+                if (request.find("DECLARE_FILE") != std::string::npos) {
+                    // Deserialized data
+                    // Extraire le reste de la chaîne
+                    std::string clientFiles = receivedData.substr(newlinePos + 1);
+                    vector<File> receivedFiles = deserialize(clientFiles);
                     
-            if (request.find("GET_FILE_LIST") != std::string::npos) {
-                // Créer une instance de ThreadArgs pour stocker les valeurs
-                ThreadArgs* threadArgs = new ThreadArgs;
-                threadArgs->clientSocket = clientSocket;
-                threadArgs->bytesReceived = bytesReceived;
-                threadArgs->clientPort = clientPort;
-                threadArgs->clientIP = inet_ntoa(clientAddress.sin_addr);
+                    // Remove the IP block from the file
+                    supprimerBlocIP(filePath, clientIP);
+                    info_mutex.lock();
+                    ofstream fichier("infos_client.txt", ios::app);
+                    if (!fichier) {
+                        cerr << "Error opening infos client file." << endl;
+                        writeLog("ERROR: Error when opening infos client file.");
+                    }
 
-                if (pthread_create(&thread, nullptr, sendFileList, threadArgs) != 0) {
-                    cerr << "Erreur lors de la création du thread." << endl;
-                    writeLog("ERROR: error when creating the thread");
-                    close(clientSocket);
-                    continue;
+                    
+                    
+                    // Open the log file in append mode if it's not already open
+                    // Écrire les données dans un fichier
+
+                    if (fichier.is_open()) {
+                        // Écrire les informations de l'adresse IP et du port du client
+                        fichier << clientIP << " : " << clientPort << endl;
+
+                        // Écrire les informations des fichiers dans le fichier
+                        for (const auto& file : receivedFiles) {
+                            fichier << file.name << " " << file.size << " octets" << endl;
+                        }
+
+                        // Ajouter un retour à la ligne après chaque ensemble d'informations
+                        fichier << endl;
+                        info_mutex.unlock();
+
+                        // Fermer le fichier
+                        fichier.close();
+                        
+                        cout << "receipt data of client "<< clientIP << endl;
+                        writeLog("INFO: receipt data of client .");
+
+                    } else {
+                        cerr << "Erreur lors de l'ouverture du fichier infos_client.txt" << endl;
+                        writeLog("ERROR: Error when opening infos client file.");
+
+                    }
+                    
+
+                }else{
+
+
+                    if (request.find("DOWNLOAD_FILE") != std::string::npos) {
+
+                        // Extraire le reste de la réponse 
+                        std::string remainingData = receivedData.substr(newlinePos + 1);
+
+                        // Trouver la position du deuxième saut de ligne
+                        newlinePos = remainingData.find('\n');
+
+                        // Extraire les informations du fichier
+                        std::string fileInfo = remainingData.substr(0, newlinePos);
+
+                        
+                        cout << "fichier à télécharger: " << fileInfo << endl;
+
+
+                        // Créer une instance de ThreadArgs pour stocker les valeurs
+                        DownloadArgs* downloadArgs = new DownloadArgs;
+                        downloadArgs->clientSocket = clientSocket;
+                        downloadArgs->bytesReceived = bytesReceived;
+                        downloadArgs->clientPort = clientPort;
+                        downloadArgs->clientIP = clientIP;
+                        downloadArgs->file_to_download = fileInfo;
+
+
+
+                        DownloadFile(downloadArgs);
+
+                    }
+
                 }
-                else{
-                    writeLog("INFO: thread successful");
-                }
+
 
             }else{
-                supprimerBlocIP(filePath, clientIP);
-                // Receipt the data of client
 
-                // Convert data receives to a string
-                string receivedData(buffer, bytesReceived);
+                // demande du client
+                std::string request = receivedData;
+                cout<<" "<<endl;
+                cout<<"request : "<<request<<endl;
+                if (request.find("GET_FILE_LIST") != std::string::npos) {
 
-                // Deserialized data
-                vector<File> receivedFiles = deserialize(receivedData);
-                
-                // Remove the IP block from the file
-                supprimerBlocIP(filePath, clientIP);
-                
-                static mutex fileMutex;  // Static mutex to ensure exclusive access to the log file
-                lock_guard<mutex> lock(fileMutex);  // Lock the mutex to guarantee exclusive access
+                    // Créer une instance de ThreadArgs pour stocker les valeurs
+                    ThreadArgs* threadArgs = new ThreadArgs;
+                    threadArgs->clientSocket = clientSocket;
+                    threadArgs->clientIP = inet_ntoa(clientAddress.sin_addr);
 
-                // Open the log file in append mode if it's not already open
-                // Écrire les données dans un fichier
-                ofstream fichier("infos_client.txt", ios::app);
-                if (!fichier) {
-                    cerr << "Error opening infos client file." << endl;
-                    writeLog("ERROR: Error when opening infos client file.");
+                    sendFileList(threadArgs);
                 }
-
-                if (fichier.is_open()) {
-                    // Écrire les informations de l'adresse IP et du port du client
-                    fichier << clientIP << " : " << clientPort << endl;
-
-                    // Écrire les informations des fichiers dans le fichier
-                    for (const auto& file : receivedFiles) {
-                        fichier << file.name << " " << file.size << " octets" << endl;
-                    }
-                    // Ajouter un retour à la ligne après chaque ensemble d'informations
-                    fichier << endl;
-
-                    // Fermer le fichier
-                    fichier.close();
-                    
-                    cout << "receipt data of client "<< clientIP << endl;
-                    writeLog("INFO: receipt data of client .");
-
-                } else {
-                    cerr << "Erreur lors de l'ouverture du fichier infos_client.txt" << endl;
-                    writeLog("ERROR: Error when opening infos client file.");
-
-                }
-                fichier.close();
-            
-
             }
         }
     }
-
-    // Fermer le socket client
     close(clientSocket);
-    
     pthread_exit(NULL);
+
 }
 
