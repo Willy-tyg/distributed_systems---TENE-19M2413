@@ -36,22 +36,21 @@ struct File{
 struct ListFile{
     string file_info;
     int file_number;
+    string ipOwner;
 };
 
 //structure pour contenir les informations a envoyer au thread pour demander un fichier
 struct ThreadParams {
-    int clientSocket;
+    string ipOwner;
     string file_info;
 };
 
 
 struct DownloadArgs {
-    int clientSocket;
     int fileSize;
     int port;
     string ipAddress;
     string filename;
-
 };
 
 

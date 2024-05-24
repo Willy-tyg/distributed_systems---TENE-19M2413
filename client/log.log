@@ -1,0 +1,13 @@
+[2024-05-23 15:31:31] option choisie: 1-declarer mes fichiers
+[2024-05-23 15:31:31] INFO: Data successful sending into the socket
+[2024-05-23 15:31:31] INFO: le client doit choisir une option:
+[2024-05-23 15:31:33] option choisie: option non disponible
+[2024-05-23 15:31:33] INFO: le client doit choisir une option:
+[2024-05-23 15:31:33] option choisie = 3: Telecharger un fichier
+[2024-05-23 15:31:35] INFO: le client doit choisir une option:
+[2024-05-23 15:32:38] option choisie: option non disponible
+[2024-05-23 15:32:38] INFO: le client doit choisir une option:
+[2024-05-23 15:32:40] option choisie: option non disponible
+[2024-05-23 15:32:40] INFO: le client doit choisir une option:
+[2024-05-23 15:32:41] option choisie: 5-quitter!
+[2024-05-23 15:32:41] fin d'éxécution; à bientôt!

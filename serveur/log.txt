@@ -1,0 +1,181 @@
+[2024-05-22 08:45:49] INFO: connection accepting success
+[2024-05-22 08:45:49] INFO: thread creating successful
+[2024-05-22 08:45:50] INFO: receipt data of client .
+[2024-05-22 08:45:52] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 08:55:49] INFO: connection accepting success
+[2024-05-22 08:55:49] INFO: thread creating successful
+[2024-05-22 08:55:50] INFO: receipt data of client .
+[2024-05-22 08:55:52] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 09:05:39] INFO: connection accepting success
+[2024-05-22 09:05:39] INFO: thread creating successful
+[2024-05-22 09:05:40] INFO: receipt data of client .
+[2024-05-22 09:05:41] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 09:05:42] INFO: receipt data of client .
+[2024-05-22 09:05:44] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 09:06:47] INFO: connection accepting success
+[2024-05-22 09:06:47] INFO: thread creating successful
+[2024-05-22 09:06:48] INFO: receipt data of client .
+[2024-05-22 09:06:49] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 09:06:50] INFO: receipt data of client .
+[2024-05-22 09:06:51] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 09:06:52] INFO: receipt data of client .
+[2024-05-22 09:06:54] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 09:06:55] INFO: receipt data of client .
+[2024-05-22 09:06:56] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 09:10:50] INFO: connection accepting success
+[2024-05-22 09:10:50] INFO: thread creating successful
+[2024-05-22 09:10:52] INFO: receipt data of client .
+[2024-05-22 09:10:52] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 09:10:53] INFO: receipt data of client .
+[2024-05-22 09:10:54] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 09:10:54] INFO: receipt data of client .
+[2024-05-22 09:10:55] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 09:10:55] INFO: receipt data of client .
+[2024-05-22 09:10:56] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 09:10:57] INFO: receipt data of client .
+[2024-05-22 09:10:58] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 09:15:40] INFO: connection accepting success
+[2024-05-22 09:15:40] INFO: thread creating successful
+[2024-05-22 09:15:41] INFO: receipt data of client .
+[2024-05-22 09:15:42] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 09:15:43] INFO: receipt data of client .
+[2024-05-22 09:15:44] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 09:34:45] INFO: connection accepting success
+[2024-05-22 09:34:45] INFO: thread creating successful
+[2024-05-22 09:34:46] INFO: receipt data of client .
+[2024-05-22 09:34:47] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 09:34:53] INFO: connection accepting success
+[2024-05-22 09:34:53] INFO: thread creating successful
+[2024-05-22 09:34:54] INFO: receipt data of client .
+[2024-05-22 09:34:55] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 09:34:56] INFO: receipt data of client .
+[2024-05-22 09:34:58] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 09:38:43] INFO: connection accepting success
+[2024-05-22 09:38:43] INFO: thread creating successful
+[2024-05-22 09:38:44] INFO: receipt data of client .
+[2024-05-22 09:38:45] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 09:38:47] INFO: receipt data of client .
+[2024-05-22 09:38:48] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 09:38:49] INFO: receipt data of client .
+[2024-05-22 09:38:49] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 09:38:50] INFO: receipt data of client .
+[2024-05-22 09:38:51] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 09:38:52] INFO: receipt data of client .
+[2024-05-22 09:38:53] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 09:38:54] INFO: receipt data of client .
+[2024-05-22 09:38:55] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 09:38:56] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 09:39:09] INFO: the socket creating successful
+[2024-05-22 09:39:09] INFO: the socket linked successful
+[2024-05-22 09:39:09] INFO: the socket is understanding
+[2024-05-22 09:39:14] INFO: connection accepting success
+[2024-05-22 09:39:14] INFO: thread creating successful
+[2024-05-22 20:54:55] INFO: the socket creating successful
+[2024-05-22 20:54:55] INFO: the socket linked successful
+[2024-05-22 20:54:55] INFO: the socket is understanding
+[2024-05-22 20:55:14] INFO: connection accepting success
+[2024-05-22 20:55:14] INFO: thread creating successful
+[2024-05-22 20:55:15] INFO: receipt data of client .
+[2024-05-22 20:55:16] INFO: receipt data of client .
+[2024-05-22 20:55:17] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 20:55:18] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 20:55:19] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 20:55:21] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 20:55:22] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 20:55:23] INFO: receipt data of client .
+[2024-05-22 20:55:24] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 20:55:27] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 20:55:28] INFO: receipt data of client .
+[2024-05-22 20:55:29] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 20:55:31] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 20:55:32] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 20:55:34] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 20:55:35] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 20:55:36] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 20:55:38] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 20:55:39] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 20:55:41] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 20:55:43] INFO: receipt data of client .
+[2024-05-22 20:55:47] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 20:55:48] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 20:55:50] INFO: receipt data of client .
+[2024-05-22 20:55:51] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 21:11:06] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 21:11:10] INFO: receipt data of client .
+[2024-05-22 21:11:11] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 21:13:20] INFO: connection accepting success
+[2024-05-22 21:13:20] INFO: thread creating successful
+[2024-05-22 21:13:21] INFO: receipt data of client .
+[2024-05-22 21:13:22] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 21:13:23] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 21:13:23] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 21:13:23] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 21:13:25] INFO: receipt data of client .
+[2024-05-22 21:13:25] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 21:13:26] INFO: receipt data of client .
+[2024-05-22 21:13:27] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 21:13:28] INFO: receipt data of client .
+[2024-05-22 21:13:29] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 21:13:30] INFO: receipt data of client .
+[2024-05-22 21:13:31] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 21:13:32] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 21:13:34] INFO: receipt data of client .
+[2024-05-22 21:13:35] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 22:00:13] INFO: connection accepting success
+[2024-05-22 22:00:13] INFO: thread creating successful
+[2024-05-22 22:00:14] INFO: receipt data of client .
+[2024-05-22 22:00:15] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 22:00:17] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 22:00:19] INFO: receipt data of client .
+[2024-05-22 22:00:20] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 22:01:51] INFO: the socket creating successful
+[2024-05-22 22:01:51] INFO: the socket linked successful
+[2024-05-22 22:01:51] INFO: the socket is understanding
+[2024-05-22 22:02:01] INFO: connection accepting success
+[2024-05-22 22:02:01] INFO: thread creating successful
+[2024-05-22 22:02:03] INFO: receipt data of client .
+[2024-05-22 22:02:03] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 22:05:18] INFO: connection accepting success
+[2024-05-22 22:05:18] INFO: thread creating successful
+[2024-05-22 22:05:19] INFO: receipt data of client .
+[2024-05-22 22:05:20] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 22:05:28] INFO: receipt data of client .
+[2024-05-22 22:05:29] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 22:05:30] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 22:05:30] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 22:05:31] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 22:05:31] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 22:12:03] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 22:12:06] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 22:12:21] INFO: connection accepting success
+[2024-05-22 22:12:21] INFO: thread creating successful
+[2024-05-22 22:12:22] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 22:12:24] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 22:13:49] INFO: connection accepting success
+[2024-05-22 22:13:49] INFO: thread creating successful
+[2024-05-22 22:13:51] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 22:13:56] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 22:14:00] INFO: connection accepting success
+[2024-05-22 22:14:00] INFO: thread creating successful
+[2024-05-22 22:14:01] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 22:14:02] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 22:14:06] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-22 22:14:39] INFO: connection accepting success
+[2024-05-23 09:59:08] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-23 10:04:33] INFO: connection accepting success
+[2024-05-23 10:04:33] INFO: thread creating successful
+[2024-05-23 10:04:34] INFO: receipt data of client .
+[2024-05-23 10:04:35] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-23 10:04:54] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-23 10:04:56] INFO: receipt data of client .
+[2024-05-23 10:04:57] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-23 10:04:57] INFO: receipt data of client .
+[2024-05-23 15:06:47] INFO: connection accepting success
+[2024-05-23 15:06:47] INFO: thread creating successful
+[2024-05-23 15:06:47] INFO: receipt data of client .
+[2024-05-23 15:06:49] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-23 15:29:55] INFO: connection accepting success
+[2024-05-23 15:29:55] INFO: thread creating successful
+[2024-05-23 15:29:57] INFO: receipt data of client .
+[2024-05-23 15:29:59] INFO : File contents sent successfully to the client '192.168.32.174'
+[2024-05-23 15:31:31] INFO: receipt data of client .

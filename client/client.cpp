@@ -18,7 +18,7 @@ void writeLog(const string& message) {
     lock_guard<mutex> lock(fileMutex);  // Lock the mutex to guarantee exclusive access
 
     // Open the log file in append mode if it's not already open
-    ofstream logFile("log.txt", ios::app);
+    ofstream logFile("log.cls", ios::app);
     if (!logFile) {
         cerr << "Error opening the log file." << endl;
         return;
@@ -204,155 +204,6 @@ void* UnderstandingDirectory(void *arg){
 
 constexpr int BUFFER_SIZE = 1024;
 
-void* sendFileToClient(void* arg) {
-    DownloadArgs* downloadArgs = static_cast<DownloadArgs*>(arg);
-    std::string ipToSend = downloadArgs->ipAddress;
-    std::string filename = downloadArgs->filename;
-    int serverPort = downloadArgs->port;
-
-    int clientSocket = socket(AF_INET, SOCK_STREAM, 0);
-    if (clientSocket == -1) {
-        writeLog("Erreur lors de la création de la socket.");
-        pthread_exit(nullptr);
-        return nullptr;
-    }
-
-    // Configuration de l'adresse du serveur
-    sockaddr_in clientAddress{};
-    clientAddress.sin_family = AF_INET;
-    clientAddress.sin_addr.s_addr = inet_addr(ipToSend.c_str());
-    clientAddress.sin_port = htons(serverPort);
-
-    // Connexion au serveur
-    bool connected= false;
-    while(!connected){
-        if (connect(clientSocket, reinterpret_cast<sockaddr*>(&clientAddress), sizeof(clientAddress)) == -1) {
-            writeLog("Erreur lors de la connexion au serveur."); 
-        }else{
-            connected =true;
-        }
-    }
-
-    // Envoi de la commande STOR au serveur
-    std::string command = "STOR " + filename;
-    if (send(clientSocket, command.c_str(), command.size(), 0) == -1) {
-        writeLog("Erreur lors de l'envoi de la commande.");
-        close(clientSocket);
-        return reinterpret_cast<void*>(1);
-    }
-
-    std::string fullPath = "data/" + filename;
-
-    if (!std::filesystem::exists(fullPath)) {
-        writeLog("ERROR: le fichier que je dois envoyer nes pas dans mon repertoire");
-        close(clientSocket);
-        return reinterpret_cast<void*>(1);
-    }
-
-    // Ouvrir le fichier en mode binaire pour l'envoi des données
-    std::ifstream file(fullPath, std::ios::binary);
-    if (!file) {
-        writeLog("ERROR: je narrive pas à ouvrir le fichier à envoyer");
-        close(clientSocket);
-        return reinterpret_cast<void*>(1);
-    }
-
-    // Envoi des données du fichier au client
-    char buffer[BUFFER_SIZE];
-    while (file.read(buffer, sizeof(buffer))) {
-        ssize_t bytesSent = send(clientSocket, buffer, file.gcount(), 0);
-        if (bytesSent == -1) {
-            writeLog("ERROR: Erreur lors de l'envoi des données du fichier.");
-            file.close();
-            close(clientSocket);
-            return reinterpret_cast<void*>(1);
-        }
-    }
-
-    // Fermeture du fichier et de la socket
-    file.close();
-    close(clientSocket);
-
-    writeLog("Envoi du fichier terminé.");
-    pthread_exit(nullptr);
-    return nullptr;
-}
-
-
-
-void* sendFile(void *arg){
-    int clientSocket = *reinterpret_cast<int*>(arg);
-
-    while(true){
-        
-        // Recevoir la demande et les informations du fichier du client
-        char buffer[1024]; // Définir une taille de tampon appropriée
-        int bytesReceived = recv(clientSocket, buffer, sizeof(buffer), 0);
-        if (bytesReceived == -1) {
-            writeLog("Erreur lors de la réception des données.");
-        } else {
-            
-            // Extraire les données reçues dans des variables
-            string receivedData(buffer, bytesReceived); // Convertir le tampon en une chaîne
-            size_t firstNewline = receivedData.find('\n');
-            std::string request = receivedData.substr(0, firstNewline);
-            if (request.find("SEND_FILE") != std::string::npos) {
-                size_t secondNewline = receivedData.find('\n', firstNewline + 1);
-                size_t thirdNewline = receivedData.find('\n', secondNewline + 1);
-
-                // Extraire chaque partie de la chaîne receivedData en fonction de la position des caractères de nouvelle ligne
-                
-                std::string fileInfo = receivedData.substr(firstNewline + 1, secondNewline - firstNewline - 1);
-                std::string ipToSend = receivedData.substr(secondNewline + 1, thirdNewline - secondNewline - 1);
-                
-     
-                size_t octetsIndex = fileInfo.find("octets");
-
-                // Extraire la partie de la chaîne de caractères jusqu'à "octets"
-                std::string filenameAndSizeStr = fileInfo.substr(0, octetsIndex-1);
-
-                // Trouver l'indice du dernier espace avant "octets"
-                size_t spaceIndex = filenameAndSizeStr.find_last_of(' ');
-
-                // Extraire la taille du fichier à partir de la chaîne de caractères
-                std::string sizeStr = filenameAndSizeStr.substr(spaceIndex + 1);
-
-                size_t fileSize;
-                std::istringstream iss(sizeStr);
-                iss >> fileSize;
-                // Extraire le nom du fichier à partir de la chaîne de caractères
-                std::string filename = filenameAndSizeStr.substr(0, spaceIndex);
-
-
-                std::cout << "Nom du fichier : " << filename << std::endl;
-                std::cout << "Taille du fichier : " << fileSize << " octets" << std::endl;
-
-
-
-
-                pthread_t clientThread;
-                int port = 1250;
-                // Créer une instance de ThreadArgs pour stocker les valeurs
-                DownloadArgs* shareArgs = new DownloadArgs;
-                shareArgs->clientSocket = clientSocket;
-                shareArgs->fileSize = fileSize;
-                shareArgs->port = port;
-                shareArgs->ipAddress = ipToSend;
-                shareArgs->filename = filename;
-
-
-
-                sendFileToClient(shareArgs);
-
-
-            }
-        }
-    }
-
-    close(clientSocket);
-    return nullptr;
-
-}
 
 // Fonction pour avoir la liste des fichiers pouvant être téléchargés
 void getlistfile(int socketFd) {
@@ -380,7 +231,7 @@ void getlistfile(int socketFd) {
     while ((bytesReceived = recv(socketFd, buffer, bufferSize - 1, 0)) > 0) {
         buffer[bytesReceived] = '\0';
         receivedData += buffer;
-        writeLog("INFO: Data received from server: " + string(buffer));
+        writeLog("INFO: liste des fichiers recus");
 
         // Vérifier si la réponse contient la fin de la liste
         if (receivedData.find("END_OF_FILE") != string::npos) {
@@ -403,16 +254,25 @@ void getlistfile(int socketFd) {
 
         string line;
         int lineNumber = 0;
+        string owner;
+        string file_info;
 
         fileList_mutex.lock();
         while (getline(ss, line)) {
             if (lineNumber != 0 && line != "END_OF_FILE") {
                 ListFile file;
-                file.file_info = line;
+
+
+                size_t Pos = line.find(';');
+                file_info = line.substr(0, Pos);
+                owner = line.substr(Pos + 1);
+
+                file.file_info = file_info;
+                file.ipOwner = owner;
                 file.file_number = lineNumber;
                 fileList.push_back(file);
 
-                cout << file.file_number << ". " << file.file_info << endl;
+                cout << file.file_number << ". " << file.file_info  << endl;
             }
             lineNumber++;
         }
@@ -423,12 +283,10 @@ void getlistfile(int socketFd) {
 }
 
 
-void* startReceive(void* arg) {
-    DownloadArgs* downloadArgs = static_cast<DownloadArgs*>(arg);
-    //int mySocket = downloadArgs->clientSocket;
-    std::string myIP = downloadArgs->ipAddress;
-    std::string filename = downloadArgs->filename;
-    int port = downloadArgs->port;
+void* sendFile(void* arg) {
+    
+    int port = 1250;
+
 
     int mySocket = socket(AF_INET, SOCK_STREAM, 0);
     if (mySocket == -1) {
@@ -437,17 +295,12 @@ void* startReceive(void* arg) {
     }
     else{
         writeLog("INFO: the socket that receive file created successful");
-        cout<< "socket crée avec succés"<<endl;
     }
 
     sockaddr_in myAddress;
 
-    // Conversion de l'adresse IP en représentation binaire
-    if (inet_pton(AF_INET, myIP.c_str(), &myAddress.sin_addr.s_addr) <= 0) {
-        writeLog("Erreur lors de la conversion de l'adresse IP.");
-        return nullptr;
-    }
 
+    myAddress.sin_addr.s_addr = htonl(INADDR_ANY);
     // Configuration de l'adresse du serveur
     myAddress.sin_family = AF_INET;
     myAddress.sin_port = htons(port);
@@ -464,7 +317,6 @@ void* startReceive(void* arg) {
         close(mySocket);
         return nullptr;
     }
-    std::cout << "Socket liée à l'adresse du serveur." << std::endl;
 
     // Mettre la socket en mode écoute
     if (listen(mySocket, 1) == -1) {
@@ -472,7 +324,6 @@ void* startReceive(void* arg) {
         close(mySocket);
         return nullptr;
     }
-    std::cout << "Socket en mode écoute." << std::endl;
 
     while (true) {
         // Accepter une connexion entrante
@@ -483,8 +334,7 @@ void* startReceive(void* arg) {
             std::cerr << "Erreur lors de l'acceptation de la connexion." << std::endl;
             continue;
         }
-        std::cout << "Connexion de l'envoyeur." << std::endl;
-        writeLog("INFO: le client disposant du fichier que j'ai demandé vient de se connecter");
+        writeLog("INFO: un client veut un de mes fichiers");
 
         // Lire la commande STOR du client
         char buffer[BUFFER_SIZE];
@@ -497,70 +347,69 @@ void* startReceive(void* arg) {
         }
 
         std::string command(buffer);
-        if (command.substr(0, 4) != "STOR") {
-            std::cerr << "Commande STOR attendue." << std::endl;
+        if (command.substr(0, 3) != "GET") {
+            std::cerr << "Commande GET attendue." << std::endl;
             close(clientSocket);
             continue;
         }
 
-        // Extraire le nom du fichier à partir de la commande STOR
-        std::string receivedFilename = command.substr(5);
-        std::cout << "Réception du fichier : " << receivedFilename << std::endl;
-        writeLog("INFO: reception du fichier'"+ receivedFilename +"';");
+        // Extraire le nom du fichier à partir de la commande GET
+        std::string receivedFilename = command.substr(4);
+        writeLog("INFO: nom du fichier'"+ receivedFilename +"';");
         // Ouvrir un fichier en écriture pour recevoir les données
-            std::string fullPath = "download/" + filename;
+        std::string fullPath = "data/" + receivedFilename;
 
-       
-
-        std::ofstream file(fullPath, std::ios::binary);
-        if (!file.is_open()) {
-            std::cerr << "Erreur lors de l'ouverture du fichier." << std::endl;
+        if (!std::filesystem::exists(fullPath)) {
+            writeLog("ERROR: le fichier que je dois envoyer n'est pas dans mon repertoire");
             close(clientSocket);
-            continue;
+            return reinterpret_cast<void*>(1);
         }
-        std::cout << "Fichier ouvert en écriture." << std::endl;
 
-        // Recevoir les données du fichier et les écrire dans le fichier
-        while (true) {
-            memset(buffer, 0, sizeof(buffer));
-            bytesRead = recv(clientSocket, buffer, sizeof(buffer), 0);
-            if (bytesRead == -1) {
-                std::cerr << "Erreur lors de la réception des données du fichier." << std::endl;
+        // Ouvrir le fichier en mode binaire pour l'envoi des données
+        std::ifstream file(fullPath, std::ios::binary);
+        if (!file) {
+            writeLog("ERROR: je n'arrive pas à ouvrir le fichier à envoyer");
+            close(clientSocket);
+            return reinterpret_cast<void*>(1);
+        }
+
+        // Envoi des données du fichier au client
+        
+        while (file.read(buffer, sizeof(buffer))) {
+            ssize_t bytesSent = send(clientSocket, buffer, file.gcount(), 0);
+            if (bytesSent == -1) {
+                writeLog("ERROR: Erreur lors de l'envoi des données du fichier.");
                 file.close();
                 close(clientSocket);
-                break;
+                return reinterpret_cast<void*>(1);
             }
-            if (bytesRead == 0) {
-                std::cout <<"Réception des données du fichier terminée." << std::endl;
-                writeLog("INFO: Réception des données du fichier terminée.");
-                break;
-            }
-            file.write(buffer, bytesRead);
         }
 
-        // Fermer le fichier
+        const char* request = "END";
+        int requestSize = strlen(request) + 1;
+
+        // Marqueur de fin
+        send(clientSocket, request, requestSize, 0);
+
+
+        // Fermeture du fichier et de la socket
         file.close();
+    
 
-        // Fermer la socket du client
-        close(clientSocket);
-        break;
+        writeLog("Envoi du fichier terminé.");
     }
-
-    // Fermer la socket principale
-    close(mySocket);
-    std::cout << "Socket principale fermée." << std::endl;
-    writeLog("INFO: Socket principale fermée.");
-
     return nullptr;
 }
 
+
 void* download_file(void* arg) {
+
     ThreadParams* params = static_cast<ThreadParams*>(arg);
 
     // Accéder aux paramètres du thread
-    int clientSocket = params->clientSocket;
     string fileInfo = params->file_info;
-
+    string ipOwner = params->ipOwner;
+    int serverPort = 1250;
 
     size_t octetsIndex = fileInfo.find("octets");
 
@@ -579,60 +428,104 @@ void* download_file(void* arg) {
     // Extraire le nom du fichier à partir de la chaîne de caractères
     std::string filename = filenameAndSizeStr.substr(0, spaceIndex);
 
-
-
-    const char* request = "DOWNLOAD_FILE";
-    int requestSize = strlen(request) + 1;
-    const char* fileInfoData = fileInfo.c_str();
-    int fileInfoSize = fileInfo.size() + 1;
-
-
-    // Concaténer la demande et les informations du fichier
-    std::string receivedData(request);
-    receivedData += "\n";  // Ajouter une nouvelle ligne pour séparer la demande et les informations
-    receivedData += fileInfo;
-
-
-    // Envoyer la demande et les informations du fichier au serveur
-    if (send(clientSocket, receivedData.c_str(), receivedData.size(), 0) == -1) {
-        perror("Erreur lors de l'envoi de la demande et des informations du fichier");
+    int rcvSocket = socket(AF_INET, SOCK_STREAM, 0);
+    if (rcvSocket == -1) {
+        writeLog("Erreur lors de la création de la socket.");
+        return nullptr;
     }
 
-    const int bufferSize = 1024;
-    char buffer[bufferSize];
-    std::string ipAddress;
+    // Configuration de l'adresse du serveur
+    sockaddr_in rcvAddress;
+    rcvAddress.sin_family = AF_INET;
+    rcvAddress.sin_addr.s_addr = inet_addr(ipOwner.c_str());
+    rcvAddress.sin_port = htons(serverPort);
 
-    // Recevoir les données du serveur
-    ssize_t bytesRead = recv(clientSocket, buffer, bufferSize, 0);
-    if (bytesRead == -1) {
-        std::cout << "Erreur lors de la réception des données du serveur." << std::endl;
-    } else {
-        std::string receivedMessage(buffer, bytesRead);
-        if (receivedMessage.find("POSITIVE:") == 0) {
-            // La chaîne commence par "POSITIVE:"
-            // Extraire l'adresse IP
-            ipAddress = receivedMessage.substr(9);
-            std::cout << "Le telechargement va commencer dans un instant" << std::endl;
-        }else {
-            std::cout << "Le fichier demandé n'est plus disponible, veillez recharger la liste et faites une nouvelle demande de telechargement" << std::endl;
-            return nullptr;
+    // Connexion au serveur
+
+   
+    if (connect(rcvSocket, (struct sockaddr*)&rcvAddress, sizeof(rcvAddress)) == -1) {
+        writeLog("Erreur lors de la connexion au serveur."); 
+    }else{
+        writeLog("INFO: success connect to a server");
+    }
+
+
+    // Envoi de la commande STOR au serveur
+    std::string command = "GET " + filename;
+    if (send(rcvSocket, command.c_str(), command.size(), 0) == -1) {
+        writeLog("Erreur lors de l'envoi de la commande.");
+        close(rcvSocket);
+        return reinterpret_cast<void*>(1);
+    }
+
+    // Ouvrir un fichier en écriture pour recevoir les données
+    std::string fullPath = "download/" + filename;
+
+       
+
+    std::ofstream file(fullPath, std::ios::binary);
+    if (!file.is_open()) {
+        std::cerr << "Erreur lors de l'ouverture du fichier." << std::endl;
+        close(rcvSocket);
+    }
+    std::cout << "Début de la réception." << std::endl;
+
+    // Initialisation des variables
+    int totalBytes = 0;
+    int receivedBytes = 0;
+    const int TOTAL_SIZE = fileSize; // Taille totale du fichier 
+    // Recevoir les données du fichier et les écrire dans le fichier
+    char buffer[BUFFER_SIZE];
+    while (true) {
+        memset(buffer, 0, sizeof(buffer));
+        int bytesRead = recv(rcvSocket, buffer, sizeof(buffer), 0);
+        if (bytesRead == -1) {
+            std::cerr << "Erreur lors de la réception des données du fichier." << std::endl;
+            file.close();
+            close(rcvSocket);
+            break;
+        }
+        if (bytesRead == 0) {
+            std::cout << "Réception des données du fichier terminée." << std::endl;
+            writeLog("INFO: Réception des données du fichier terminée.");
+            break;
+        }
+
+        file.write(buffer, bytesRead);
+        totalBytes += bytesRead;
+        receivedBytes += bytesRead;
+
+        // Afficher la barre de progression
+        int progress = (int)(((float)receivedBytes / (float)TOTAL_SIZE) * 100.0f);
+        std::cout << "\r[";
+        for (int i = 0; i < 100; i++) {
+            if (i < progress ) {
+                std::cout << "=";
+            } else {
+                std::cout << " ";
+            }
+        }
+        std::cout << "] " << progress << "% (" << receivedBytes << "/" << TOTAL_SIZE << " bytes)";
+        std::cout.flush();
+
+        std::string command(buffer);
+        if (command.substr(0, 3) != "END") {
+            continue;
+        } else {
+            break;
         }
     }
-    delete params; // libérer la mémoire allouée pour la structure ThreadParams
 
-    int port = 1250;
-    // Créer une instance de ThreadArgs pour stocker les valeurs
-    DownloadArgs* downloadArgs = new DownloadArgs;
-    downloadArgs->clientSocket = clientSocket;
-    downloadArgs->fileSize = fileSize;
-    downloadArgs->port = port;
-    downloadArgs->ipAddress = ipAddress;
-    downloadArgs->filename = filename;
+    std::cout << "\nFichier reçu avec succès!" << std::endl;
+    writeLog("INFO: fin du telechargement!");
+    // Fermer le fichier
+    file.close();
 
+    // Fermer la socket du client
+    close(rcvSocket);
 
-
-   startReceive(downloadArgs);
-
-
-    return nullptr;
 }
+
+
+
+

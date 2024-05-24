@@ -36,6 +36,7 @@ int main() {
     cout <<"*********************************************"<<endl;
 
 
+    bool isFileListLoaded = false;
 
     while  (true) {
 
@@ -43,6 +44,7 @@ int main() {
         int option;
         int file_number;
         bool file_found = false;
+        string file_ip;
         string file_info;
 
         string directoryPath = "data";
@@ -57,6 +59,7 @@ int main() {
         cout << "Choisissez une option : ";
         writeLog("INFO: le client doit choisir une option:");
         cin >> option;
+
 
 
         // Validation de la saisie
@@ -86,7 +89,7 @@ int main() {
 
                     }else if (pthread_create(&send_file, nullptr, sendFile, &clientSocket) != 0) {
                         cerr << "Erreur lors de la création du thread pour partager les fichiers" << endl;
-                        writeLog("ERROR: error when creating a thread to understandind 'data' directory");
+                        writeLog("ERROR: error when creating a thread to share file");
 
                     }else{
 
@@ -105,16 +108,20 @@ int main() {
                 cout<< "voici la liste des fichiers disponible!"<<endl;
 
                 // Fonction pour gérer la demande, la recuperation et l'affichage de la liste
-
+                
                 getlistfile(clientSocket);
+                isFileListLoaded = true;
+            
 
                 break;
             case 3:
                 writeLog("option choisie = 3: Telecharger un fichier");
                 cout << endl;
-                cout<< "voici la liste des fichiersdonc vous pouvez telechargez:"<<endl;
-
-                getlistfile(clientSocket);
+                
+                if(!isFileListLoaded){
+                    cout << "veillez recharger la liste des fichiers d'abord avec l'option 2" <<endl;
+                    break;
+                } 
 
                 cout << "Entrez le numéro du fichier à télécharger : ";
                 cin >> file_number;
@@ -135,13 +142,15 @@ int main() {
                     if (file.file_number == file_number) {
                         file_found = true;
                         file_info = file.file_info;
+                        file_ip = file.ipOwner;
                         break;
                     }
                 }
 
                 // Vérifier si le fichier a été trouvé et afficher les informations
                 if (file_found) {
-                    cout << "Informations du fichier " << file_number << " : " << file_info << endl;
+                    cout << "Informations du fichier " << file_number << " : " << file_info <<endl;
+                    cout<<"Adresse ip du proprietaire : "<<file_ip<< endl;
                 } else {
                     cout << "Fichier non trouvé! veillez recharger la liste des fichiers, bien vérifier le numéro et réessayer" << endl;
                     cout<<""<<endl;
@@ -151,7 +160,7 @@ int main() {
                 fileList_mutex.unlock();
                 cout << endl;
 
-                params->clientSocket = clientSocket;
+                params->ipOwner = file_ip;
                 params->file_info = file_info;
 
 
